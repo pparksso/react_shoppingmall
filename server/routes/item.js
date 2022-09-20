@@ -13,5 +13,29 @@ router.get("/", (req, res) => {
     res.status(500).json({ message: "서버 오류" });
   }
 });
+router.get("/:category", (req, res) => {
+  try {
+    const category = req.params.category;
+    if (category == "all") {
+      itemDb.find({}, (err, result) => {
+        res.json({ item: result });
+      });
+    } else if (category == "female") {
+      itemDb.find({ category: { $in: ["female01", "female02", "female03", "female04"] } }, (err, result) => {
+        res.json({ item: result });
+      });
+    } else if (category == "male") {
+      itemDb.find({ category: { $in: ["male01", "male02", "male03", "male04"] } }, (err, result) => {
+        res.json({ item: result });
+      });
+    } else {
+      itemDb.find({ category }, (err, result) => {
+        res.json({ item: result });
+      });
+    }
+  } catch (err) {
+    res.status(500).json({ message: "서버 오류" });
+  }
+});
 
 module.exports = router;
