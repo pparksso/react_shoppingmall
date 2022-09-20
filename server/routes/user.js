@@ -102,5 +102,4 @@ router.post("/pwchange", auth, async (req, res) => {
     res.status(500).json({ pwChange: false, err });
   }
 });
-// router.mypage("/mypage", auth, async (req, res) => {});
 module.exports = router;

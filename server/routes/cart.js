@@ -36,18 +36,28 @@ router.post("/", auth, (req, res) => {
       }
     });
   } catch (err) {
-    res.status(500).json("서버 오류");
+    res.status(500).json({ message: "서버 오류" });
   }
 });
 router.get("/cartview", auth, async (req, res) => {
-  let itemArr = [];
-  const user = await req.user;
-  const cartArr = await req.user.cart;
-  await cartArr.forEach((item) => {
-    itemDb.findOne({ no: item }, (err, result) => {
-      itemArr.push(result);
-    });
-  });
-  console.log(itemArr);
+  try {
+    let cartArr = [];
+    let itemArr = [];
+    const user = await req.user;
+    if (req.user.cart.length > 0) {
+      await req.user.cart.forEach((item) => {
+        cartArr.push(item.no);
+      });
+      itemDb.find({ no: { $in: cartArr } }, (err, result) => {
+        itemArr.push(result);
+        res.json({ items: itemArr });
+      });
+    } else {
+      res.json({ cart: false });
+    }
+  } catch (err) {
+    res.status(500).json({ message: "서버 오류" });
+  }
 });
+
 module.exports = router;

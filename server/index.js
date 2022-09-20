@@ -2,10 +2,11 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const app = express();
 const mongoose = require("mongoose");
-const userRouter = require("./routes/user");
 const cookie = require("cookie-parser");
 const cors = require("cors");
+const userRouter = require("./routes/user");
 const cartRouter = require("./routes/cart");
+const itemRouter = require("./routes/item");
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -30,6 +31,7 @@ app.get("/", (req, res) => {
 
 app.use("/user", userRouter);
 app.use("/cart", cartRouter);
+app.use("/item", itemRouter);
 
 const PORT = app.get("port");
 app.listen(PORT, () => {
