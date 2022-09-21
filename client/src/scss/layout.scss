@@ -22,6 +22,12 @@ a {
   text-decoration: none;
   color: inherit;
 }
+button {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}
 .container {
   width: 90vw;
   margin: 0 auto;
@@ -36,6 +42,7 @@ a {
   display: flex;
   left: 0;
   top: 0;
+  background-color: #000;
   justify-content: space-between;
   &:after {
     content: "";
@@ -68,35 +75,6 @@ a {
             padding: 0 20px;
             display: flex;
             align-items: center;
-          }
-          .depth02Cover {
-            background-color: #fff;
-            height: 50px;
-            width: 100vw;
-            left: 0;
-            position: absolute;
-            display: none;
-            &.on {
-              display: block;
-            }
-          }
-          .depth02 {
-            width: 100vw;
-            height: 50px;
-            font-size: 15px;
-            position: absolute;
-            color: #333;
-            align-items: center;
-            display: none;
-            &.on {
-              display: flex;
-            }
-            li {
-              margin-right: 30px;
-              a span {
-                font-size: 14px;
-              }
-            }
           }
         }
       }

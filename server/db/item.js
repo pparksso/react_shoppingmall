@@ -22,6 +22,9 @@ const itemSchema = new mongoose.Schema({
   size: {
     type: String,
   },
+  views: {
+    type: Number,
+  },
 });
 
 module.exports = mongoose.model("item", itemSchema);

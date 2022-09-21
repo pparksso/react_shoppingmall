@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
     res.status(500).json({ message: "서버 오류" });
   }
 });
-router.get("/:category", (req, res) => {
+router.get("/category/:category", (req, res) => {
   try {
     const category = req.params.category;
     if (category == "all") {
@@ -37,5 +37,12 @@ router.get("/:category", (req, res) => {
     res.status(500).json({ message: "서버 오류" });
   }
 });
-
+router.get("/best", async (req, res) => {
+  try {
+    const items = await itemDb.find().sort({ views: -1 }).limit(5);
+    res.json({ items });
+  } catch (err) {
+    res.status(500).json({ message: "서버 오류" });
+  }
+});
 module.exports = router;
