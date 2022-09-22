@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../scss/main.scss";
 import Weekly from "../items/Weekly";
-import All from "../items/All";
+import Item from "../items/Item";
 import Pagenation from "../main/Pagination";
 
 const Main = () => {
   const [best, setBest] = useState([]);
   const [all, setAll] = useState([]);
   const [count, setCount] = useState("");
-  const [limit, setLimit] = useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState("");
+  const [startPage, setStartPage] = useState("");
+  const [lastPage, setLastPage] = useState("");
+  const [page, setPage] = useState(1);
+  const [category, setCategory] = useState("all");
   useEffect(() => {
     axios({
       url: "http://localhost:8080/item/best",
@@ -20,19 +23,15 @@ const Main = () => {
   }, []);
   useEffect(() => {
     axios({
-      url: "http://localhost:8080/item/category/all",
+      url: `http://localhost:8080/item/category/${category}?page=${page}`,
     }).then((res) => {
-      setAll(res.data.item);
-      setCount(res.data.item.length);
+      setAll(res.data.currentItems);
+      setCount(res.data.totalItems);
+      setTotalPage(res.data.totalPage);
+      setStartPage(res.data.startPage);
+      setLastPage(res.data.lastPage);
     });
   }, []);
-  const indexOfLast = currentPage * limit;
-  const indexOfFirst = indexOfLast - limit;
-  const currentPosts = (all) => {
-    let currentPosts = 0;
-    currentPosts = all.slice(indexOfFirst, indexOfLast);
-    return currentPosts;
-  };
   return (
     <div className="main">
       <div className="weekly">
@@ -59,12 +58,12 @@ const Main = () => {
         <div className="container">
           <div className="categoryItems items">
             <ul className="itemList">
-              {currentPosts.map((item, idx) => {
-                return <All key={idx} itemInfo={item} />;
+              {all.map((item, idx) => {
+                return <Item key={idx} itemInfo={item} />;
               })}
             </ul>
-            <Pagenation limit={limit} total={all.length} paginate={setCurrentPage}></Pagenation>
           </div>
+          <Pagenation totalPage={totalPage} startPage={startPage} lastPage={lastPage} category={"all"} currentPage={page}></Pagenation>
         </div>
       </div>
     </div>

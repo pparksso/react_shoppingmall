@@ -1,22 +1,36 @@
-const Pagination = ({ limit, total, paginate }) => {
+const Pagination = ({ totalPage, startPage, lastPage, category, currentPage }) => {
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(total / limit); i++) {
-    pageNumbers.push(i);
+  if (lastPage > totalPage) {
+    for (let i = 1; i <= totalPage; i++) {
+      pageNumbers.push(i);
+    }
+  } else if (lastPage <= totalPage) {
+    for (let i = 1; i <= lastPage; i++) {
+      pageNumbers.push(i);
+    }
   }
   return (
-    <div>
-      <nav>
-        <PageUl className="pagination">
-          {pageNumbers.map((number) => (
-            <PageLi key={number} className="page-item">
-              <PageSpan onClick={() => paginate(number)} className="page-link">
-                {number}
-              </PageSpan>
-            </PageLi>
-          ))}
-        </PageUl>
-      </nav>
-    </div>
+    <ul className="pagination">
+      {startPage > 5 ? (
+        <button>
+          <span class="material-icons">chevron_left</span>
+        </button>
+      ) : null}
+      {pageNumbers.map((num, idx) => {
+        return (
+          <li key={idx} className={currentPage == num ? "on" : null}>
+            <button>
+              <span>{num}</span>
+            </button>
+          </li>
+        );
+      })}
+      {totalPage > lastPage ? (
+        <button>
+          <span class="material-icons">chevron_right</span>
+        </button>
+      ) : null}
+    </ul>
   );
 };
 

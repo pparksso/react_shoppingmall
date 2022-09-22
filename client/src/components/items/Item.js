@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const All = ({ itemInfo }) => {
+const Item = ({ itemInfo }) => {
   const bg = {
     backgroundImage: `url(${itemInfo.image[0]})`,
   };
@@ -29,4 +29,4 @@ const All = ({ itemInfo }) => {
   );
 };
 
-export default All;
+export default Item;
