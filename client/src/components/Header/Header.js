@@ -1,7 +1,25 @@
 import { Link } from "react-router-dom";
 import "../../scss/layout.scss";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Header() {
+  const [isLogined, setIsLogined] = useState(false);
+  useEffect(() => {
+    axios({
+      url: "http://localhost:8080/user/isLogined",
+    })
+      .then((res) => {
+        if (!res.data.auth) {
+          setIsLogined(false);
+        } else if (res.data.auth) {
+          setIsLogined(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <div className="header">
       <div className="headerLeft">
@@ -35,14 +53,26 @@ export default function Header() {
       </div>
       <ul className="utilMenu">
         <li>
-          <Link to="/join">
-            <span>회원가입</span>
-          </Link>
+          {isLogined ? (
+            <Link to="">
+              <span>마이페이지</span>
+            </Link>
+          ) : (
+            <Link to="/join">
+              <span>회원가입</span>
+            </Link>
+          )}
         </li>
         <li>
-          <Link to="/login">
-            <span>로그인</span>
-          </Link>
+          {isLogined ? (
+            <Link to="/">
+              <span>로그아웃</span>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <span>로그인</span>
+            </Link>
+          )}
         </li>
         <li>
           <Link to="/search">

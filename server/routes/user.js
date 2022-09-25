@@ -7,6 +7,13 @@ const countDb = require("../db/count");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 
+router.get("/isLogined", auth, (req, res) => {
+  try {
+    res.status(200).json({ auth: true });
+  } catch (err) {
+    res.status(500);
+  }
+});
 router.post("/join", async (req, res) => {
   try {
     const email = await req.body.email;
