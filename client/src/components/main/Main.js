@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../scss/main.scss";
 import Weekly from "../items/Weekly";
-import Item from "../items/Item";
-import Pagenation from "../main/Pagination";
+import { useSelector } from "react-redux";
+import Product from "../product/Product";
 
 const Main = () => {
+  const Movepage = useSelector((state) => {
+    return state.page.value.num;
+  });
   const [best, setBest] = useState([]);
   const [all, setAll] = useState([]);
   const [count, setCount] = useState("");
@@ -22,6 +25,9 @@ const Main = () => {
     });
   }, []);
   useEffect(() => {
+    setPage(Movepage);
+  });
+  useEffect(() => {
     axios({
       url: `http://localhost:8080/item/category/${category}?page=${page}`,
     }).then((res) => {
@@ -31,7 +37,7 @@ const Main = () => {
       setStartPage(res.data.startPage);
       setLastPage(res.data.lastPage);
     });
-  }, []);
+  }, [page]);
   return (
     <div className="main">
       <div className="weekly">
@@ -50,22 +56,7 @@ const Main = () => {
           </div>
         </div>
       </div>
-      <div className="itemList">
-        <div className="titleBox">
-          <span className="category">ALL</span>
-          <span className="number">({count})</span>
-        </div>
-        <div className="container">
-          <div className="categoryItems items">
-            <ul className="itemList">
-              {all.map((item, idx) => {
-                return <Item key={idx} itemInfo={item} />;
-              })}
-            </ul>
-          </div>
-          <Pagenation totalPage={totalPage} startPage={startPage} lastPage={lastPage} category={"all"} currentPage={page}></Pagenation>
-        </div>
-      </div>
+      <Product count={count} totalPage={totalPage} startPage={startPage} lastPage={lastPage} page={page} item={all}></Product>
     </div>
   );
 };

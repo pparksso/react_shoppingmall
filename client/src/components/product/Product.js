@@ -1,12 +1,28 @@
-// import React, { useEffect } from "react";
-// import axios from "axios";
-// import { useParams } from "react-router-dom";
+import "../../scss/main.scss";
+import Item from "../items/Item";
+import Pagenation from "../main/Pagination";
 
-// const Product = () => {
-//   const params = useParams();
-//   const category = params.category;
+const Product = ({ count, totalPage, startPage, lastPage, page, item }) => {
+  return (
+    <div className="main">
+      <div className="itemList">
+        <div className="titleBox">
+          <span className="category">ALL</span>
+          <span className="number">({count})</span>
+        </div>
+        <div className="container">
+          <div className="categoryItems items">
+            <ul className="itemList">
+              {item.map((item, idx) => {
+                return <Item key={idx} itemInfo={item} />;
+              })}
+            </ul>
+          </div>
+          <Pagenation totalPage={totalPage} startPage={startPage} lastPage={lastPage} currentPage={page}></Pagenation>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-//   return <div></div>;
-// };
-
-// export default Product;
+export default Product;
