@@ -17,6 +17,7 @@ router.get("/category/:category", async (req, res) => {
   try {
     const category = req.params.category;
     let page = parseInt(req.query.page);
+    console.log(page);
     if (!page) {
       page = 1;
     }

@@ -34,17 +34,17 @@ export default function Header() {
         <div className="gnb">
           <ul className="list">
             <li className="depth01">
-              <Link to="/item/all">
+              <Link to="/all">
                 <span>전체상품</span>
               </Link>
             </li>
             <li className="depth01">
-              <Link to="/item/female">
+              <Link to="/female">
                 <span>여성</span>
               </Link>
             </li>
             <li className="depth01">
-              <Link to="/item/male">
+              <Link to="/male">
                 <span>남성</span>
               </Link>
             </li>
