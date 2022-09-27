@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
-import Main from "./components/main/Main";
+import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
-import All from "./components/main/All";
-import Female from "./components/main/Female";
-import Male from "./components/main/Male";
+import All from "./components/Main/All";
+import Female from "./components/Main/Female";
+import Male from "./components/Main/Male";
+import Register from "./components/User/Register";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/all" element={<All />} />
           <Route path="/female" element={<Female />} />
           <Route path="/male" element={<Male />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
         <Footer />
       </div>

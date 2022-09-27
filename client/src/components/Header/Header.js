@@ -58,7 +58,7 @@ export default function Header() {
               <span>마이페이지</span>
             </Link>
           ) : (
-            <Link to="/join">
+            <Link to="/register">
               <span>회원가입</span>
             </Link>
           )}
@@ -76,7 +76,7 @@ export default function Header() {
         </li>
         <li>
           <Link to="/search">
-            <span class="material-icons">search</span>
+            <span class="material-icons-outlined">shopping_cart</span>
           </Link>
         </li>
       </ul>

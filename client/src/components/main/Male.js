@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../scss/main.scss";
 import { useSelector } from "react-redux";
-import Product from "../product/Product";
+import Product from "../Product/Product";
 
 const Male = () => {
   const Movepage = useSelector((state) => {

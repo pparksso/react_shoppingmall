@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../scss/main.scss";
 import { useSelector } from "react-redux";
-import Product from "../product/Product";
+import Product from "../Product/Product";
 
 const Female = () => {
   const Movepage = useSelector((state) => {
@@ -17,7 +17,7 @@ const Female = () => {
   const [category, setCategory] = useState("female");
   useEffect(() => {
     setPage(Movepage);
-  });
+  }, [Movepage]);
   useEffect(() => {
     axios({
       url: `http://localhost:8080/item/category/${category}?page=${page}`,

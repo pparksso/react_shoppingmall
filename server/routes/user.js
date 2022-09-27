@@ -19,6 +19,10 @@ router.post("/join", async (req, res) => {
     const email = await req.body.email;
     const password = await req.body.password;
     const name = await req.body.name;
+    const tel = await req.body.tel;
+    const zipCode = await req.body.zipCode;
+    const address01 = await req.body.address01;
+    const address02 = await req.body.address02;
     const userCount = await countDb.findOneAndUpdate({ name: "user" }, { $inc: { count: 1 } });
     const pwHash = await bcrypt.hash(password, saltRounds);
     const newUser = await userDb.create({
@@ -26,6 +30,10 @@ router.post("/join", async (req, res) => {
       password: pwHash,
       name,
       no: userCount.count + 1,
+      tel,
+      zipCode,
+      address01,
+      address02,
     });
     return res.json({ join: true });
   } catch (err) {
@@ -34,7 +42,7 @@ router.post("/join", async (req, res) => {
 });
 router.post("/emailCheck", async (req, res) => {
   try {
-    const email = await req.body.email;
+    const email = await req.body.email.trim();
     const emailCheck = await userDb.findOne({ email });
     if (emailCheck) {
       return res.json({ emailCheck: false, message: "이미 가입 된 이메일 입니다." });

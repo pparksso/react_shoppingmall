@@ -1,0 +1,97 @@
+.userPage {
+  margin-top: 150px;
+  .container {
+    max-width: 50vw;
+    .titleBox {
+      margin-bottom: 50px;
+      h1 {
+        font-size: 36px;
+        font-weight: 700;
+        text-align: center;
+      }
+    }
+  }
+}
+
+form {
+  .inputBox {
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    &:nth-child(1) {
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    label {
+      font-weight: 500;
+      font-size: 18px;
+      flex-basis: 25%;
+      text-align: center;
+    }
+    .inner {
+      flex-grow: 1;
+      display: flex;
+      input {
+        font-size: 16px;
+        padding: 5px;
+        width: 100%;
+      }
+      &.addressBox {
+        flex-direction: column;
+        .zipCodeBox {
+          display: flex;
+          margin-bottom: 10px;
+        }
+        input {
+          &:nth-child(2) {
+            margin-bottom: 10px;
+          }
+        }
+      }
+      button {
+        font-size: 14px;
+        white-space: nowrap;
+        background-color: #000;
+        border-radius: 10px;
+        margin-left: 10px;
+        color: #fff;
+        font-weight: 600;
+        padding: 10px;
+      }
+    }
+  }
+  .btns {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    .btn {
+      padding: 10px;
+      border-radius: 10px;
+      color: #fff;
+      margin: 0 5px;
+      &.joinBtn {
+        background-color: rgb(21, 138, 21);
+      }
+      &.resetBtn {
+        background-color: rgb(167, 21, 21);
+      }
+    }
+  }
+}
+.postPopup {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  .postmodal {
+    display: block;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 500px;
+  }
+}

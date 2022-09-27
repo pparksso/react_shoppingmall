@@ -1,6 +1,6 @@
 import "../../scss/main.scss";
-import Item from "../items/Item";
-import Pagenation from "../main/Pagination";
+import Item from "../Items/Item";
+import Pagenation from "../Main/Pagination";
 
 const Product = ({ count, totalPage, startPage, lastPage, page, item, category }) => {
   return (

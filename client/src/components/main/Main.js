@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../scss/main.scss";
-import Weekly from "../items/Weekly";
+import Weekly from "../Items/Weekly";
 import { useSelector } from "react-redux";
-import Product from "../product/Product";
+import Product from "../Product/Product";
+import { goPage } from "../../store/slice/product";
 
 const Main = () => {
   const Movepage = useSelector((state) => {
