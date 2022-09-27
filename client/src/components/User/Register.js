@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../scss/user.scss";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import axios from "axios";
@@ -18,6 +18,9 @@ const Register = () => {
   const [address01, setAddress01] = useState("");
   const emailFocus = useRef();
 
+  useEffect(() => {
+    emailFocus.current.focus();
+  }, []);
   // 인풋 값 관리
   const inputName = (e) => {
     setName(e.target.value);

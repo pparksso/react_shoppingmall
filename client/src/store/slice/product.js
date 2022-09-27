@@ -11,11 +11,17 @@ const pageSlice = createSlice({
     goPage: (state, action) => {
       state.value = action.payload;
     },
-    mainPage: (state, action) => {
-      state.value = action.payload;
+  },
+});
+const loginSlice = createSlice({
+  name: "login",
+  initialState: false,
+  reducers: {
+    loginSuccess: (state, action) => {
+      state = action.payload;
     },
   },
 });
 
-export const { goPage, mainPage } = pageSlice.actions;
+export const { goPage } = pageSlice.actions;
 export default pageSlice.reducer;

@@ -4,7 +4,6 @@ import "../../scss/main.scss";
 import Weekly from "../Items/Weekly";
 import { useSelector } from "react-redux";
 import Product from "../Product/Product";
-import { goPage } from "../../store/slice/product";
 
 const Main = () => {
   const Movepage = useSelector((state) => {
@@ -27,7 +26,7 @@ const Main = () => {
   }, []);
   useEffect(() => {
     setPage(Movepage);
-  });
+  }, [Movepage]);
   useEffect(() => {
     axios({
       url: `http://localhost:8080/item/category/${category}?page=${page}`,

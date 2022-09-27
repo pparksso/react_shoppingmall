@@ -1,5 +1,7 @@
 .userPage {
-  margin-top: 150px;
+  padding-top: 80px;
+  margin-top: 80px;
+  height: calc(100vh - 80px - 150px);
   .container {
     max-width: 50vw;
     .titleBox {
@@ -12,7 +14,10 @@
     }
   }
 }
-
+.loginBox {
+  width: 40%;
+  margin: 0 auto;
+}
 form {
   .inputBox {
     padding: 10px;
@@ -75,23 +80,13 @@ form {
       &.resetBtn {
         background-color: rgb(167, 21, 21);
       }
+      &.loginBtn {
+        background-color: #000;
+      }
     }
   }
-}
-.postPopup {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.1);
-  .postmodal {
-    display: block;
-    position: absolute;
-    top: 50%;
-    z-index: 1;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 500px;
+  .kakao {
+    margin-top: 10px;
+    text-align: center;
   }
 }

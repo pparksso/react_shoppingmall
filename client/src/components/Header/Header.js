@@ -1,25 +1,12 @@
 import { Link } from "react-router-dom";
 import "../../scss/layout.scss";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Header() {
-  const [isLogined, setIsLogined] = useState(false);
-  useEffect(() => {
-    axios({
-      url: "http://localhost:8080/user/isLogined",
-    })
-      .then((res) => {
-        if (!res.data.auth) {
-          setIsLogined(false);
-        } else if (res.data.auth) {
-          setIsLogined(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const isLogined = useSelector((state) => {
+    return state.login.value;
+  });
+
   return (
     <div className="header">
       <div className="headerLeft">

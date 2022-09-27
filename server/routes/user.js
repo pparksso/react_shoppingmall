@@ -57,8 +57,9 @@ router.post("/login", async (req, res) => {
   try {
     const email = await req.body.email;
     const password = await req.body.password;
+    console.log("ok");
     const findEmail = await userDb.findOne({ email });
-    if (email == findEmail.email) {
+    if (findEmail) {
       bcrypt.compare(password, findEmail.password).then((result) => {
         if (result) {
           const token = jwt.sign({ id: findEmail._id }, process.env.JWT_SECRET);
@@ -66,11 +67,11 @@ router.post("/login", async (req, res) => {
             res.cookie("auth", token).json({ login: true, name: findEmail.name });
           });
         } else {
-          res.json({ message: "비밀번호가 틀렸습니다." });
+          res.json({ message: "비밀번호가 틀렸습니다.", login: false });
         }
       });
     } else {
-      res.json({ message: "등록된 이메일이 아닙니다." });
+      res.json({ message: "등록된 이메일이 아닙니다.", login: false });
     }
   } catch (err) {
     res.status(500).json({ message: "서버 오류입니다." });

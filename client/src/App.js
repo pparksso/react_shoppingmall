@@ -6,6 +6,7 @@ import All from "./components/Main/All";
 import Female from "./components/Main/Female";
 import Male from "./components/Main/Male";
 import Register from "./components/User/Register";
+import Login from "./components/User/Login";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/female" element={<Female />} />
           <Route path="/male" element={<Male />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </div>

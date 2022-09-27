@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { goPage } from "../../store/slice/product";
 
