@@ -1,12 +1,8 @@
 import { Link } from "react-router-dom";
 import "../../scss/layout.scss";
-import { useSelector } from "react-redux";
+import UtilMenu from "./UtilMenu";
 
 export default function Header() {
-  const isLogined = useSelector((state) => {
-    return state.login.value;
-  });
-
   return (
     <div className="header">
       <div className="headerLeft">
@@ -38,35 +34,7 @@ export default function Header() {
           </ul>
         </div>
       </div>
-      <ul className="utilMenu">
-        <li>
-          {isLogined ? (
-            <Link to="">
-              <span>마이페이지</span>
-            </Link>
-          ) : (
-            <Link to="/register">
-              <span>회원가입</span>
-            </Link>
-          )}
-        </li>
-        <li>
-          {isLogined ? (
-            <Link to="/">
-              <span>로그아웃</span>
-            </Link>
-          ) : (
-            <Link to="/login">
-              <span>로그인</span>
-            </Link>
-          )}
-        </li>
-        <li>
-          <Link to="/search">
-            <span class="material-icons-outlined">shopping_cart</span>
-          </Link>
-        </li>
-      </ul>
+      <UtilMenu />
     </div>
   );
 }

@@ -12,7 +12,7 @@ const Item = ({ itemInfo }) => {
           <Link to="">
             <div className="top">
               <button className="emptyHeart">
-                <span class="material-icons">favorite_border</span>
+                <span className="material-icons">favorite_border</span>
               </button>
             </div>
             <div className="imgBox" style={bg}></div>

@@ -7,7 +7,7 @@ const countDb = require("../db/count");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 
-router.get("/isLogined", auth, (req, res) => {
+router.post("/isLogined", auth, (req, res) => {
   try {
     res.status(200).json({ auth: true });
   } catch (err) {
@@ -57,7 +57,6 @@ router.post("/login", async (req, res) => {
   try {
     const email = await req.body.email;
     const password = await req.body.password;
-    console.log("ok");
     const findEmail = await userDb.findOne({ email });
     if (findEmail) {
       bcrypt.compare(password, findEmail.password).then((result) => {

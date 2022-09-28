@@ -85,10 +85,11 @@ button {
     display: flex;
     li {
       padding: 0 15px;
-      a {
-        height: 80px;
-        display: flex;
-        align-items: center;
+      display: flex;
+      align-items: center;
+      font-family: "Noto Sans KR", sans-serif;
+      button {
+        color: #fff;
       }
     }
   }

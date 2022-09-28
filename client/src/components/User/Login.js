@@ -44,7 +44,7 @@ const Login = () => {
         if (res.data.message === "등록된 이메일이 아닙니다.") return alert("등록된 이메일이 아닙니다.");
         if (res.data.message === "비밀번호가 틀렸습니다.") return alert("비밀번호가 틀렸습니다.");
         if (res.data.login) {
-          dispatch(loginSuccess(true));
+          // dispatch(loginSuccess(true));
           navigate("/");
         }
       })
@@ -57,8 +57,10 @@ const Login = () => {
     loginFunc();
   };
   const loginKeyEvent = (e) => {
-    e.preventDefault();
-    if (e.key === "Enter") return loginFunc();
+    if (e.key === "Enter") {
+      e.preventDefault();
+      return loginFunc();
+    }
   };
   return (
     <div className="login userPage">
@@ -67,7 +69,7 @@ const Login = () => {
           <h1>로그인</h1>
         </div>
         <div className="loginBox">
-          <form action="http://localhost:8080/user/login" method="POST" className="loginForm">
+          <form className="loginForm">
             <div className="inputBox">
               <label>이메일</label>
               <div className="inner">

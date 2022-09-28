@@ -17,7 +17,7 @@ const Pagination = ({ totalPage, startPage, lastPage, currentPage }) => {
     <ul className="pagination">
       {startPage > 5 ? (
         <button onClick={() => dispatch(goPage({ num: startPage - 1 }))}>
-          <span class="material-icons">chevron_left</span>
+          <span className="material-icons">chevron_left</span>
         </button>
       ) : null}
       {pageNumbers.map((num, idx) => {
@@ -31,7 +31,7 @@ const Pagination = ({ totalPage, startPage, lastPage, currentPage }) => {
       })}
       {totalPage > lastPage ? (
         <button onClick={() => dispatch(goPage({ num: lastPage + 1 }))}>
-          <span class="material-icons">chevron_right</span>
+          <span className="material-icons">chevron_right</span>
         </button>
       ) : null}
     </ul>

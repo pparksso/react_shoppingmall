@@ -14,7 +14,7 @@ const Weekly = ({ itemInfo, idx }) => {
                 <span>{idx + 1}</span>
               </div>
               <button className="emptyHeart">
-                <span class="material-icons">favorite_border</span>
+                <span className="material-icons">favorite_border</span>
               </button>
             </div>
             <div className="imgBox" style={bg}></div>
