@@ -6,7 +6,6 @@ const auth = require("../middleware/auth");
 router.get("/", (req, res) => {
   try {
     const no = parseInt(req.query.no);
-    console.log(no);
     itemDb.findOne({ no }, (err, result) => {
       res.json({ result });
     });

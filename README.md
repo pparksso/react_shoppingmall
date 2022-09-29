@@ -9,6 +9,11 @@
 
 - 카카오페이API, 결제, 로그인 후 인증페이지들... 안됨 하...
 
+## 수정사항
+
+- detail page 캐러셀 사진 사이즈 고정해야함..
+- 페이지네이션 state값 초기화되게
+
 ## error
 
 1. Expected `onClick` listener to be a function, instead got a value of `object` type.
