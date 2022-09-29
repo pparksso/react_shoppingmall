@@ -3,8 +3,11 @@ import axios from "axios";
 import "../../scss/main.scss";
 import { useSelector } from "react-redux";
 import Product from "../Product/Product";
+import { useParams } from "react-router-dom";
 
-const Male = () => {
+const Category = () => {
+  const params = useParams();
+  const getCategory = params.category;
   const Movepage = useSelector((state) => {
     return state.page.value.num;
   });
@@ -14,22 +17,24 @@ const Male = () => {
   const [startPage, setStartPage] = useState("");
   const [lastPage, setLastPage] = useState("");
   const [page, setPage] = useState(1);
-  const [category, setCategory] = useState("male");
+  const [category, setCategory] = useState("");
+  useEffect(() => {
+    setCategory(getCategory);
+  }, [getCategory]);
   useEffect(() => {
     setPage(Movepage);
-  }, [Movepage]);
+  });
   useEffect(() => {
     axios({
       url: `http://localhost:8080/item/category/${category}?page=${page}`,
     }).then((res) => {
-      console.log(res.data);
       setAll(res.data.currentItems);
       setCount(res.data.totalItems);
       setTotalPage(res.data.totalPage);
       setStartPage(res.data.startPage);
       setLastPage(res.data.lastPage);
     });
-  }, [page]);
+  }, [category, page]);
   return (
     <div className="sub">
       <Product count={count} totalPage={totalPage} startPage={startPage} lastPage={lastPage} page={page} item={all} category={category}></Product>
@@ -37,4 +42,4 @@ const Male = () => {
   );
 };
 
-export default Male;
+export default Category;

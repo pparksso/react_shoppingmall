@@ -63,7 +63,7 @@ router.post("/login", async (req, res) => {
         if (result) {
           const token = jwt.sign({ id: findEmail._id }, process.env.JWT_SECRET);
           userDb.updateOne({ email: findEmail.email }, { $set: { token } }, (err, result) => {
-            res.cookie("auth", token).json({ login: true, name: findEmail.name });
+            res.cookie("auth", token, { maxAge: 60000, httpOnly: true }).json({ login: true, name: findEmail.name });
           });
         } else {
           res.json({ message: "비밀번호가 틀렸습니다.", login: false });

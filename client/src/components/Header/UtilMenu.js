@@ -8,25 +8,27 @@ const UtilMenu = (props) => {
   const [cookies, setCookies, removeCookies] = useCookies(["auth"]);
   const [isLogined, setIsLogined] = useState(false);
   const navigate = useNavigate();
-  console.log(isLogined);
+  // console.log(isLogined);
   const authCheck = () => {
     const token = cookies.auth;
-    console.log(token);
-    axios({
-      method: "POST",
-      url: "http://localhost:8080/user/isLogined",
-      data: {
-        token,
-      },
-    })
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.auth) return setIsLogined(true);
-        else return false;
+    // console.log(token);
+    if (token) {
+      axios({
+        method: "POST",
+        url: "http://localhost:8080/user/isLogined",
+        data: {
+          token,
+        },
       })
-      .catch((err) => {
-        console.log("500보내야됨");
-      });
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.auth) return setIsLogined(true);
+          else return false;
+        })
+        .catch((err) => {
+          console.log("500보내야됨");
+        });
+    }
   };
   useEffect(() => {
     authCheck();

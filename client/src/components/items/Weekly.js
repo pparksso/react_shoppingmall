@@ -8,7 +8,7 @@ const Weekly = ({ itemInfo, idx }) => {
     <>
       <li>
         <div className="item">
-          <Link to="">
+          <Link to={`/detail/${itemInfo.no}`}>
             <div className="top">
               <div className="num">
                 <span>{idx + 1}</span>
@@ -20,7 +20,7 @@ const Weekly = ({ itemInfo, idx }) => {
             <div className="imgBox" style={bg}></div>
           </Link>
           <div className="txtBox">
-            <Link to="">
+            <Link to={`/detail/${itemInfo.no}`}>
               <h2 className="title">{itemInfo.title}</h2>
             </Link>
             <span className="price">{itemInfo.price.toLocaleString()}</span>

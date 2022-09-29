@@ -2,11 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
-import All from "./components/Main/All";
-import Female from "./components/Main/Female";
-import Male from "./components/Main/Male";
+import Category from "./components/Main/Category";
 import Register from "./components/User/Register";
 import Login from "./components/User/Login";
+import Detail from "./components/Product/Detail";
 
 function App() {
   return (
@@ -15,11 +14,10 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/all" element={<All />} />
-          <Route path="/female" element={<Female />} />
-          <Route path="/male" element={<Male />} />
+          <Route path="/category/:category" element={<Category />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/detail/:no" element={<Detail />} />
         </Routes>
         <Footer />
       </div>

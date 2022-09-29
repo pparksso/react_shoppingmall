@@ -9,7 +9,7 @@ const Item = ({ itemInfo }) => {
     <>
       <li>
         <div className="item">
-          <Link to="">
+          <Link to={`/detail/${itemInfo.no}`}>
             <div className="top">
               <button className="emptyHeart">
                 <span className="material-icons">favorite_border</span>
@@ -18,7 +18,7 @@ const Item = ({ itemInfo }) => {
             <div className="imgBox" style={bg}></div>
           </Link>
           <div className="txtBox">
-            <Link to="">
+            <Link to={`/detail/${itemInfo.no}`}>
               <h2 className="title">{itemInfo.title}</h2>
             </Link>
             <span className="price">{itemInfo.price.toLocaleString()}</span>
