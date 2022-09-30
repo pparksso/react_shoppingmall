@@ -63,7 +63,7 @@ router.post("/login", async (req, res) => {
         if (result) {
           const token = jwt.sign({ id: findEmail._id }, process.env.JWT_SECRET);
           userDb.updateOne({ email: findEmail.email }, { $set: { token } }, (err, result) => {
-            res.cookie("auth", token, { maxAge: 60000, httpOnly: true }).json({ login: true, name: findEmail.name });
+            res.cookie("auth", token, { maxAge: 1000 * 60 * 24 * 24 }).json({ login: true, name: findEmail.name });
           });
         } else {
           res.json({ message: "비밀번호가 틀렸습니다.", login: false });
@@ -101,20 +101,31 @@ router.post("/withdrawal", auth, async (req, res) => {
     res.status(500).json({ messate: "서버 오류" });
   }
 });
-router.get("/mypage", auth, (req, res) => {
+router.post("/mypage", auth, (req, res) => {
   const user = req.user;
   res.json({ user });
 });
-router.post("/pwchange", auth, async (req, res) => {
+router.post("/editinfo", auth, async (req, res) => {
   try {
-    const user = await req.user;
     const password = await req.body.password;
-    const pwHash = await bcrypt.hash(password, saltRounds);
-    userDb.updateOne({ email: user.email }, { $set: { password: pwHash } }, (err, result) => {
-      if (result) return res.json({ pwChange: true });
+    const email = await req.body.email;
+    const name = await req.body.name;
+    const tel = await req.body.tel;
+    const zipCode = await req.body.zipCode;
+    const address01 = await req.body.address01;
+    const address02 = await req.body.address02;
+    const findEmail = await userDb.findOne({ email });
+    bcrypt.compare(password, findEmail.password).then((result) => {
+      if (result) {
+        userDb.updateOne({ email }, { $set: { name, tel, zipCode, address01, address02 } }, (err, result) => {
+          res.json({ edit: true });
+        });
+      } else {
+        res.json({ message: "비밀번호가 틀렸습니다.", edit: false });
+      }
     });
   } catch (err) {
-    res.status(500).json({ pwChange: false, err });
+    res.status(500).json({ edit: false, err });
   }
 });
 module.exports = router;

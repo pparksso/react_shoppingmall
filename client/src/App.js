@@ -6,6 +6,7 @@ import Category from "./components/Main/Category";
 import Register from "./components/User/Register";
 import Login from "./components/User/Login";
 import Detail from "./components/Product/Detail";
+import Mypage from "./components/User/Mypage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/detail/:no" element={<Detail />} />
+          <Route path="/mypage" element={<Mypage />} />
         </Routes>
         <Footer />
       </div>

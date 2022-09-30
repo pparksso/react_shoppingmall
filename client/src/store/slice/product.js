@@ -11,6 +11,9 @@ const pageSlice = createSlice({
     goPage: (state, action) => {
       state.value = action.payload;
     },
+    resetPage: (state, action) => {
+      state.value = action.payload;
+    },
   },
 });
 const loginSlice = createSlice({
@@ -23,5 +26,5 @@ const loginSlice = createSlice({
   },
 });
 
-export const { goPage } = pageSlice.actions;
+export const { goPage, resetPage } = pageSlice.actions;
 export default pageSlice.reducer;

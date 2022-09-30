@@ -5,7 +5,6 @@ const auth = (req, res, next) => {
   try {
     // const token = req.cookies.auth;
     const token = req.body.token;
-    console.log(token);
     if (token) {
       const verify = jwt.verify(token, process.env.JWT_SECRET);
       userDb.findOne({ _id: verify.id }, (err, result) => {

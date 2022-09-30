@@ -33,8 +33,9 @@ const Login = () => {
     if (email === "") return alert("이메일을 입력해주세요.");
     if (password === "") return alert("비밀번호를 입력해주세요.");
     axios({
-      url: "http://localhost:8080/user/login",
       method: "POST",
+      url: "http://localhost:8080/user/login",
+      withCredentials: true,
       data: {
         email,
         password,

@@ -1,38 +1,10 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import IsLogined from "../User/IsLogined";
 
 const UtilMenu = (props) => {
-  const [cookies, setCookies, removeCookies] = useCookies(["auth"]);
-  const [isLogined, setIsLogined] = useState(false);
   const navigate = useNavigate();
-  // console.log(isLogined);
-  const authCheck = () => {
-    const token = cookies.auth;
-    // console.log(token);
-    if (token) {
-      axios({
-        method: "POST",
-        url: "http://localhost:8080/user/isLogined",
-        data: {
-          token,
-        },
-      })
-        .then((res) => {
-          console.log(res.data);
-          if (res.data.auth) return setIsLogined(true);
-          else return false;
-        })
-        .catch((err) => {
-          console.log("500보내야됨");
-        });
-    }
-  };
-  useEffect(() => {
-    authCheck();
-  });
   const logout = () => {
     axios({
       url: "http://localhost:8080/user/logout",
@@ -47,8 +19,8 @@ const UtilMenu = (props) => {
   return (
     <ul className="utilMenu">
       <li>
-        {isLogined ? (
-          <Link to="">
+        {IsLogined() ? (
+          <Link to="/mypage">
             <span>마이페이지</span>
           </Link>
         ) : (
@@ -58,7 +30,7 @@ const UtilMenu = (props) => {
         )}
       </li>
       <li>
-        {isLogined ? (
+        {IsLogined() ? (
           <button onClick={logout}>
             <span>로그아웃</span>
           </button>

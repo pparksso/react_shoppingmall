@@ -23,7 +23,7 @@ const Category = () => {
   }, [getCategory]);
   useEffect(() => {
     setPage(Movepage);
-  });
+  }, [Movepage]);
   useEffect(() => {
     axios({
       url: `http://localhost:8080/item/category/${category}?page=${page}`,
