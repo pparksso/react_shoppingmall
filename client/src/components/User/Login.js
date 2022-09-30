@@ -1,14 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const emailFocus = useRef();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   // 인풋 관리
   const inputEmail = (e) => {
     setEmail(e.target.value);
@@ -44,8 +40,7 @@ const Login = () => {
         if (res.data.message === "등록된 이메일이 아닙니다.") return alert("등록된 이메일이 아닙니다.");
         if (res.data.message === "비밀번호가 틀렸습니다.") return alert("비밀번호가 틀렸습니다.");
         if (res.data.login) {
-          // dispatch(loginSuccess(true));
-          navigate("/");
+          window.location.replace("/");
         }
       })
       .catch((err) => {

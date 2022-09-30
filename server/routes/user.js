@@ -76,10 +76,10 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "서버 오류입니다." });
   }
 });
-router.get("/logout", auth, (req, res) => {
+router.post("/logout", (req, res) => {
   try {
-    const email = req.user.email;
-    userDb.updateOne({ email }, { $unset: { token: "" } }, (err, result) => {
+    const token = req.body.token;
+    userDb.updateOne({ token }, { $unset: { token: "" } }, (err, result) => {
       res.json({ logout: true });
     });
   } catch (err) {

@@ -8,7 +8,6 @@ const auth = (req, res, next) => {
     if (token) {
       const verify = jwt.verify(token, process.env.JWT_SECRET);
       userDb.findOne({ _id: verify.id }, (err, result) => {
-        console.log(result);
         if (!result) return res.json({ auth: false });
         req.user = result;
         next();

@@ -1,21 +1,8 @@
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import IsLogined from "../User/IsLogined";
+import LogoutBtn from "../User/LogoutBtn";
 
 const UtilMenu = (props) => {
-  const navigate = useNavigate();
-  const logout = () => {
-    axios({
-      url: "http://localhost:8080/user/logout",
-    })
-      .then((res) => {
-        if (res.data.logout) return navigate("/");
-      })
-      .catch((err) => {
-        console.log("500보내야됨");
-      });
-  };
   return (
     <ul className="utilMenu">
       <li>
@@ -31,9 +18,7 @@ const UtilMenu = (props) => {
       </li>
       <li>
         {IsLogined() ? (
-          <button onClick={logout}>
-            <span>로그아웃</span>
-          </button>
+          <LogoutBtn />
         ) : (
           <Link to="/login">
             <span>로그인</span>
