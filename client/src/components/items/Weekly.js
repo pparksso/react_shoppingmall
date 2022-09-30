@@ -13,9 +13,6 @@ const Weekly = ({ itemInfo, idx }) => {
               <div className="num">
                 <span>{idx + 1}</span>
               </div>
-              <button className="emptyHeart">
-                <span className="material-icons">favorite_border</span>
-              </button>
             </div>
             <div className="imgBox" style={bg}></div>
           </Link>

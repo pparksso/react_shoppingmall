@@ -10,11 +10,6 @@ const Item = ({ itemInfo }) => {
       <li>
         <div className="item">
           <Link to={`/detail/${itemInfo.no}`}>
-            <div className="top">
-              <button className="emptyHeart">
-                <span className="material-icons">favorite_border</span>
-              </button>
-            </div>
             <div className="imgBox" style={bg}></div>
           </Link>
           <div className="txtBox">

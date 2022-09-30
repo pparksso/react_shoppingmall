@@ -4,11 +4,12 @@ const itemDb = require("../db/item");
 const userDb = require("../db/user");
 const auth = require("../middleware/auth");
 
-router.post("/", auth, (req, res) => {
+router.post("/", (req, res) => {
   try {
-    const user = req.user;
     const itemNo = parseInt(req.body.no);
-    userDb.findOne({ email: user.email }, (err, result) => {
+    const quantity = parseInt(req.body.count);
+    const token = req.body.token;
+    userDb.findOne({ token }, (err, result) => {
       let duplicate = false;
       result.cart.forEach((item) => {
         if (item.no === itemNo) {
@@ -19,12 +20,12 @@ router.post("/", auth, (req, res) => {
         return res.json({ add: false, message: "이미 장바구니에 있습니다." });
       } else {
         userDb.updateOne(
-          { email: user.email },
+          { token },
           {
             $push: {
               cart: {
                 no: itemNo,
-                quantity: 1,
+                quantity: quantity,
               },
             },
           },

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../../scss/detail.scss";
+import CartBtn from "../Items/CartBtn";
 
 const Detail = () => {
   const params = useParams();
@@ -63,9 +64,7 @@ const Detail = () => {
             </button>
           </div>
           <div className="btns">
-            <button className="cart">
-              <span>장바구니</span>
-            </button>
+            <CartBtn no={no} count={count} />
             <button className="payment">
               <span>바로구매</span>
             </button>
