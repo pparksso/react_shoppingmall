@@ -7,6 +7,7 @@ import Register from "./components/User/Register";
 import Login from "./components/User/Login";
 import Detail from "./components/Product/Detail";
 import Mypage from "./components/User/Mypage";
+import KakaoRedirect from "./components/User/KakaoRedirect";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/detail/:no" element={<Detail />} />
           <Route path="/mypage" element={<Mypage />} />
+          <Route path="/kakaoredirect" element={<KakaoRedirect />} />
         </Routes>
         <Footer />
       </div>

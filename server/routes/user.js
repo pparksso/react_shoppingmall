@@ -76,6 +76,33 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "서버 오류입니다." });
   }
 });
+router.post("/kakaologin", async (req, res) => {
+  const token = req.body.token;
+  const email = req.body.email;
+  try {
+    const findEmail = await userDb.findOne({ email });
+    if (!findEmail) {
+      const userCount = await countDb.findOneAndUpdate({ name: "user" }, { $inc: { count: 1 } });
+      userDb.create(
+        {
+          email,
+          token,
+        },
+        (err, result) => {
+          res.cookie("auth", token, { maxAge: 1000 * 60 * 24 * 24 }).json({ login: true });
+        }
+      );
+    } else {
+      userDb.updateOne({ email }, { $set: { token } }, (err, result) => {
+        if (result.modifiedCount === 1) {
+          res.cookie("auth", token, { maxAge: 1000 * 60 * 24 * 24 }).json({ login: true });
+        }
+      });
+    }
+  } catch {
+    res.status(500);
+  }
+});
 router.post("/logout", (req, res) => {
   try {
     const token = req.body.token;

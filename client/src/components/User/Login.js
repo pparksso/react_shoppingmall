@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import KakaoLoginBtn from "./KakaoLoginBtn";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -77,11 +78,7 @@ const Login = () => {
                 <input type="password" name="password" value={password} onChange={inputPassword} onKeyDown={loginKeyEvent} maxLength={16} minLength={8} />
               </div>
             </div>
-            <div className="kakao">
-              <button className="kakaoLoginBtn">
-                <img src="/images/common/kakao_login_medium_wide.png" alt="" />
-              </button>
-            </div>
+            <KakaoLoginBtn />
             <div className="btns">
               <button className="btn loginBtn" onClick={loginClickEvent}>
                 로그인
