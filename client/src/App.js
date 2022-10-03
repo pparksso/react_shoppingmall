@@ -8,6 +8,7 @@ import Login from "./components/User/Login";
 import Detail from "./components/Product/Detail";
 import Mypage from "./components/User/Mypage";
 import KakaoRedirect from "./components/User/KakaoRedirect";
+import CartPage from "./components/User/CartPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/detail/:no" element={<Detail />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/kakaoredirect" element={<KakaoRedirect />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
         <Footer />
       </div>

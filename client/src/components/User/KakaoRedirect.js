@@ -55,7 +55,15 @@ const KakaoRedirect = () => {
       });
   }, []);
 
-  return <div className="kakao"></div>;
+  return (
+    <div className="kakao userPage">
+      <div className="loadingBox">
+        <div className="loading">
+          <h1>로그인 중입니다.</h1>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default KakaoRedirect;

@@ -23,7 +23,7 @@ const CartBtn = ({ no, count }) => {
         .catch((err) => {
           console.log(err);
         });
-    } else return alert("가입한 회원만 사용가능합니다.");
+    } else return alert("로그인 후 이용이 가능합니다.");
   };
   return (
     <button className="cart" onClick={cartIn}>

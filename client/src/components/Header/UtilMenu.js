@@ -26,7 +26,7 @@ const UtilMenu = (props) => {
         )}
       </li>
       <li>
-        <Link to="/search">
+        <Link to="/cart">
           <span className="material-icons-outlined">shopping_cart</span>
         </Link>
       </li>

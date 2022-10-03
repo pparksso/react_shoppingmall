@@ -40,18 +40,19 @@ router.post("/", (req, res) => {
     res.status(500).json({ message: "서버 오류" });
   }
 });
-router.get("/cartview", auth, async (req, res) => {
+router.post("/cartview", async (req, res) => {
+  const token = await req.body.token;
   try {
     let cartArr = [];
     let itemArr = [];
-    const user = await req.user;
-    if (req.user.cart.length > 0) {
-      await req.user.cart.forEach((item) => {
+    const user = await userDb.findOne({ token });
+    if (user.cart.length > 0) {
+      user.cart.forEach((item) => {
         cartArr.push(item.no);
       });
       itemDb.find({ no: { $in: cartArr } }, (err, result) => {
         itemArr.push(result);
-        res.json({ items: itemArr });
+        res.json({ cart: itemArr });
       });
     } else {
       res.json({ cart: false });
