@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Cookies } from "react-cookie";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const cookies = new Cookies();
 
 const CartPage = () => {
+  const dispatch = useDispatch();
   const [noCart, setNocart] = useState(false);
   const [items, setItems] = useState([]);
   const [quantity, setQuantity] = useState([]);
@@ -30,6 +32,7 @@ const CartPage = () => {
         console.log(err);
       });
   }, []);
+
   return (
     <div className="cart userPage">
       <div className="container">
@@ -86,7 +89,11 @@ const CartPage = () => {
                 </li>
                 <li>
                   <span>
-                    <button>
+                    <button
+                      onClick={() => {
+                        dispatch();
+                      }}
+                    >
                       <span>삭제</span>
                     </button>
                   </span>
