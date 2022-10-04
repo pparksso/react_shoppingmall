@@ -1,7 +1,7 @@
 .userPage {
   padding-top: 80px;
   margin-top: 80px;
-  height: calc(100vh - 80px - 150px);
+  min-height: calc(100vh - 80px - 150px);
   .container {
     max-width: 50vw;
     .titleBox {
@@ -156,6 +156,47 @@ form {
       color: #666;
       font-size: 14px;
       font-weight: 400;
+    }
+  }
+}
+.payBox {
+  background-color: #f5f5f5;
+  margin: 30px 0;
+  padding: 30px;
+  text-align: center;
+  .title,
+  .won {
+    font-weight: 400;
+    font-size: 14px;
+  }
+  .price {
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
+.payBtnBox {
+  text-align: center;
+  padding-bottom: 100px;
+  a,
+  button {
+    border: 1px solid #000;
+    display: inline-block;
+    width: 200px;
+    padding: 15px 0;
+    margin: 0 10px;
+    transition: all 0.2s ease-in-out;
+    &.payment {
+      color: #fff;
+      background-color: #000;
+      &:hover {
+        background-color: #333;
+        border: 1px solid #333;
+      }
+    }
+    &.keepShopping {
+      &:hover {
+        background-color: #f5f5f5;
+      }
     }
   }
 }

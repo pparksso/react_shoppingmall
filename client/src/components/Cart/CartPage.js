@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Cookies } from "react-cookie";
 import { Link } from "react-router-dom";
-import RemoveCart from "./RemoveCart";
+import PayBox from "./PayBox";
+import PayBtn from "./PayBtn";
 
 const cookies = new Cookies();
 
@@ -11,6 +12,8 @@ const CartPage = () => {
   const [del, setDel] = useState(false);
   const [items, setItems] = useState([]);
   const [quantity, setQuantity] = useState([]);
+  const [price, setPrice] = useState(0);
+  const [pay, setPay] = useState(false);
   const token = cookies.get(["auth"]);
   useEffect(() => {
     axios({
@@ -26,9 +29,23 @@ const CartPage = () => {
         if (!res.data.cart) {
           setItems([]);
           setNocart(true);
+          setPay(false);
         } else {
+          setPay(true);
           setItems(res.data.cart[0]);
           setQuantity(res.data.quantity);
+          let calculateTotal = () => {
+            let total = 0;
+            res.data.cart[0].map((item) => {
+              res.data.quantity.map((item02) => {
+                if (item.no === item02.no) {
+                  total += parseInt(item.price) * item02.quantity;
+                }
+              });
+            });
+            setPrice(total);
+          };
+          calculateTotal();
         }
       })
       .catch((err) => {
@@ -103,7 +120,6 @@ const CartPage = () => {
                 <li>
                   <span>{item.price.toLocaleString()}</span>
                 </li>
-                {/* <RemoveCart no={item.no} token={token} /> */}
                 <li>
                   <button onClick={() => deleteItem(item.no)}>
                     <span>삭제</span>
@@ -118,6 +134,12 @@ const CartPage = () => {
             </div>
           )}
         </div>
+        {pay && (
+          <>
+            <PayBox price={price} />
+            <PayBtn />
+          </>
+        )}
       </div>
     </div>
   );
