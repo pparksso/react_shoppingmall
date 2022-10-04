@@ -61,5 +61,15 @@ router.post("/cartview", async (req, res) => {
     res.status(500).json({ message: "서버 오류" });
   }
 });
+router.post("/del", auth, async (req, res) => {
+  const no = parseInt(req.body.no);
+  const email = req.user.email;
+  try {
+    await userDb.updateOne({ email }, { $pull: { cart: { no: no } } });
+    res.json({ delete: true });
+  } catch (err) {
+    res.status(500).json({ delete: false });
+  }
+});
 
 module.exports = router;

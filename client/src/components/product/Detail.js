@@ -65,9 +65,6 @@ const Detail = () => {
           </div>
           <div className="btns">
             <CartBtn no={no} count={count} />
-            <button className="payment">
-              <span>바로구매</span>
-            </button>
           </div>
           <div className="descBox">
             <p className="title">상품설명</p>

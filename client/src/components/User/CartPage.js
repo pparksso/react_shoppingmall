@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Cookies } from "react-cookie";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import RemoveCart from "./RemoveCart";
 
 const cookies = new Cookies();
 
 const CartPage = () => {
-  const dispatch = useDispatch();
   const [noCart, setNocart] = useState(false);
+  const [del, setDel] = useState(false);
   const [items, setItems] = useState([]);
   const [quantity, setQuantity] = useState([]);
   const token = cookies.get(["auth"]);
@@ -22,8 +22,11 @@ const CartPage = () => {
       },
     })
       .then((res) => {
-        if (!res.data.cart) return setNocart(true);
-        else {
+        setDel(false);
+        if (!res.data.cart) {
+          setItems([]);
+          setNocart(true);
+        } else {
           setItems(res.data.cart[0]);
           setQuantity(res.data.quantity);
         }
@@ -31,8 +34,25 @@ const CartPage = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-
+  }, [del]);
+  const deleteItem = (no) => {
+    axios({
+      method: "POST",
+      url: `http://localhost:8080/cart/del`,
+      withCredentials: true,
+      data: {
+        no,
+        token,
+      },
+    })
+      .then((res) => {
+        if (res.data.delete) setDel(true);
+        else return alert("장바구니에서 상품을 제거하지 못했습니다.");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="cart userPage">
       <div className="container">
@@ -41,10 +61,8 @@ const CartPage = () => {
         </div>
         <div className="cartList">
           <ul className="tableTitle">
-            <li className="check">
-              <label>
-                <input type="checkbox" name="all" />
-              </label>
+            <li className="idx">
+              <span>No.</span>
             </li>
             <li>
               <span>상품정보</span>
@@ -62,10 +80,8 @@ const CartPage = () => {
           {items.map((item, idx) => {
             return (
               <ul className="tableTitle" key={idx}>
-                <li className="check">
-                  <label>
-                    <input type="checkbox" name="all" />
-                  </label>
+                <li className="idx">
+                  <span>{idx + 1}</span>
                 </li>
                 <li>
                   <div className="itemDesc">
@@ -85,18 +101,13 @@ const CartPage = () => {
                   </span>
                 </li>
                 <li>
-                  <span>{item.price}</span>
+                  <span>{item.price.toLocaleString()}</span>
                 </li>
+                {/* <RemoveCart no={item.no} token={token} /> */}
                 <li>
-                  <span>
-                    <button
-                      onClick={() => {
-                        dispatch();
-                      }}
-                    >
-                      <span>삭제</span>
-                    </button>
-                  </span>
+                  <button onClick={() => deleteItem(item.no)}>
+                    <span>삭제</span>
+                  </button>
                 </li>
               </ul>
             );

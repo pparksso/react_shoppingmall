@@ -123,6 +123,10 @@ form {
         align-items: center;
         a {
           display: inline-block;
+          text-align: left;
+          span {
+            word-break: keep-all;
+          }
         }
         img {
           width: 70px;
