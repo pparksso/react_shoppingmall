@@ -52,7 +52,7 @@ router.post("/cartview", async (req, res) => {
       });
       itemDb.find({ no: { $in: cartArr } }, (err, result) => {
         itemArr.push(result);
-        res.json({ cart: itemArr });
+        res.json({ cart: itemArr, quantity: user.cart });
       });
     } else {
       res.json({ cart: false });

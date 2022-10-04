@@ -111,12 +111,30 @@ form {
   .tableTitle {
     display: table;
     width: 100%;
+    table-layout: fixed;
     border-bottom: 1px solid #ddd;
     li {
       padding: 15px 0;
       display: table-cell;
       vertical-align: middle;
       text-align: center;
+      .itemDesc {
+        display: flex;
+        align-items: center;
+        a {
+          display: inline-block;
+        }
+        img {
+          width: 70px;
+          height: 90px;
+          margin-right: 10px;
+        }
+      }
+      button {
+        color: #fff;
+        background-color: #000;
+        padding: 5px 10px;
+      }
       span {
         font-size: 14px;
         font-weight: 400;

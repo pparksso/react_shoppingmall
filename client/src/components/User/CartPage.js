@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Cookies } from "react-cookie";
+import { Link } from "react-router-dom";
 
 const cookies = new Cookies();
 
 const CartPage = () => {
   const [noCart, setNocart] = useState(false);
   const [items, setItems] = useState([]);
+  const [quantity, setQuantity] = useState([]);
   const token = cookies.get(["auth"]);
   useEffect(() => {
     axios({
@@ -21,6 +23,7 @@ const CartPage = () => {
         if (!res.data.cart) return setNocart(true);
         else {
           setItems(res.data.cart[0]);
+          setQuantity(res.data.quantity);
         }
       })
       .catch((err) => {
@@ -62,13 +65,21 @@ const CartPage = () => {
                   </label>
                 </li>
                 <li>
-                  <img src={item.image[0]} alt={item.title} />
+                  <div className="itemDesc">
+                    <Link to={`/detail/${item.no}`}>
+                      <img src={item.image[0]} alt={item.title} />
+                    </Link>
+                    <Link to={`/detail/${item.no}`}>
+                      <span>{item.title}</span>
+                    </Link>
+                  </div>
                 </li>
                 <li>
-                  <span>{item.title}</span>
-                </li>
-                <li>
-                  <span></span>
+                  <span>
+                    {quantity.map((item02) => {
+                      return item02.no === item.no ? item02.quantity : null;
+                    })}
+                  </span>
                 </li>
                 <li>
                   <span>{item.price}</span>
