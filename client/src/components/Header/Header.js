@@ -20,17 +20,17 @@ export default function Header() {
         <div className="gnb">
           <ul className="list">
             <li className="depth01">
-              <Link to="/all" onClick={() => dispatch(resetPage({ num: 1 }))}>
+              <Link to="/item/all" onClick={() => dispatch(resetPage({ num: 1 }))}>
                 <span>전체상품</span>
               </Link>
             </li>
             <li className="depth01">
-              <Link to="/female" onClick={() => dispatch(resetPage({ num: 1 }))}>
+              <Link to="/item/female" onClick={() => dispatch(resetPage({ num: 1 }))}>
                 <span>여성</span>
               </Link>
             </li>
             <li className="depth01">
-              <Link to="/male" onClick={() => dispatch(resetPage({ num: 1 }))}>
+              <Link to="/item/male" onClick={() => dispatch(resetPage({ num: 1 }))}>
                 <span>남성</span>
               </Link>
             </li>

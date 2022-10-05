@@ -27,7 +27,7 @@ const Category = () => {
   }, [Movepage]);
   useEffect(() => {
     axios({
-      url: `http://localhost:8080/item/category/${category}?page=${page}`,
+      url: `http://localhost:8080/item/category/${getCategory}?page=${page}`,
     })
       .then((res) => {
         setAll(res.data.currentItems);
@@ -38,8 +38,10 @@ const Category = () => {
       })
       .catch((err) => {
         navigate("/500");
+        // console.log(err);
       });
   }, [category, page]);
+
   return (
     <div className="sub">
       <Product count={count} totalPage={totalPage} startPage={startPage} lastPage={lastPage} page={page} item={all} category={category}></Product>

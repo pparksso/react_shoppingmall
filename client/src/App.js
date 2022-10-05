@@ -21,24 +21,21 @@ function App() {
       <div className="App">
         <Header />
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/:category" element={<Category />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/detail/:no" element={<Detail />} />
-          <Route path="/mypage" element={<Mypage />} />
-          <Route path="/kakaoredirect" element={<KakaoRedirect />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/successpay" element={<SuccessPay />} />
-          <Route path="/canclepay" element={<CanclePay />} />
-          <Route path="/failpay" element={<FailPay />} />
-          <Route path="*" element={<NotFound />} />
+          <Route exact path="/" element={<Main />} />
+          <Route exact path="/item/:category" element={<Category />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/detail/:no" element={<Detail />} />
+          <Route exact path="/mypage" element={<Mypage />} />
+          <Route exact path="/kakaoredirect" element={<KakaoRedirect />} />
+          <Route exact path="/cart" element={<CartPage />} />
+          <Route exact path="/successpay" element={<SuccessPay />} />
+          <Route exact path="/canclepay" element={<CanclePay />} />
+          <Route exact path="/failpay" element={<FailPay />} />
+          <Route path="/500" element={<ServerErr />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
         <Footer />
-        <Routes>
-          <Route path="/500" element={<ServerErr />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
       </div>
     </BrowserRouter>
   );
