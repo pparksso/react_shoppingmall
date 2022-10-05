@@ -32,7 +32,7 @@ app.use(
 app.use(express.static(path.join(__dirname, "/build")));
 app.set("port", process.env.PORT || 8099);
 
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/build/index.html"));
 });
 app.use("/user", userRouter);
