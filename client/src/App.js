@@ -9,6 +9,9 @@ import Detail from "./components/Product/Detail";
 import Mypage from "./components/User/Mypage";
 import KakaoRedirect from "./components/User/KakaoRedirect";
 import CartPage from "./components/Cart/CartPage";
+import SuccessPay from "./components/Cart/SuccessPay";
+import CanclePay from "./components/Cart/CanclePay";
+import FailPay from "./components/Cart/FailPay";
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/kakaoredirect" element={<KakaoRedirect />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/successpay" element={<SuccessPay />} />
+          <Route path="/canclepay" element={<CanclePay />} />
+          <Route path="/failpay" element={<FailPay />} />
         </Routes>
         <Footer />
       </div>

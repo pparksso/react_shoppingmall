@@ -26,9 +26,11 @@ const UtilMenu = (props) => {
         )}
       </li>
       <li>
-        <Link to="/cart">
-          <span className="material-icons-outlined">shopping_cart</span>
-        </Link>
+        {IsLogined() && (
+          <Link to="/cart">
+            <span className="material-icons-outlined">shopping_cart</span>
+          </Link>
+        )}
       </li>
     </ul>
   );

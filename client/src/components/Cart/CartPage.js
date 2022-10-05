@@ -14,6 +14,7 @@ const CartPage = () => {
   const [quantity, setQuantity] = useState([]);
   const [price, setPrice] = useState(0);
   const [pay, setPay] = useState(false);
+  const [email, setEmail] = useState("");
   const token = cookies.get(["auth"]);
   useEffect(() => {
     axios({
@@ -34,6 +35,7 @@ const CartPage = () => {
           setPay(true);
           setItems(res.data.cart[0]);
           setQuantity(res.data.quantity);
+          setEmail(res.data.email);
           let calculateTotal = () => {
             let total = 0;
             res.data.cart[0].map((item) => {
@@ -137,7 +139,7 @@ const CartPage = () => {
         {pay && (
           <>
             <PayBox price={price} />
-            <PayBtn />
+            <PayBtn price={price} email={email} />
           </>
         )}
       </div>

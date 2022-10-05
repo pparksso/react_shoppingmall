@@ -3,6 +3,7 @@ const router = express.Router();
 const itemDb = require("../db/item");
 const userDb = require("../db/user");
 const auth = require("../middleware/auth");
+const axios = require("axios");
 
 router.post("/", (req, res) => {
   try {
@@ -52,7 +53,7 @@ router.post("/cartview", async (req, res) => {
       });
       itemDb.find({ no: { $in: cartArr } }, (err, result) => {
         itemArr.push(result);
-        res.json({ cart: itemArr, quantity: user.cart });
+        res.json({ cart: itemArr, quantity: user.cart, email: user.email });
       });
     } else {
       res.json({ cart: false });
@@ -71,5 +72,13 @@ router.post("/del", auth, async (req, res) => {
     res.status(500).json({ delete: false });
   }
 });
-
+router.post("/pay", async (req, res) => {
+  const email = await req.body.partner_user_id;
+  try {
+    await userDb.updateOne({ email }, { $set: { cart: [] } });
+    res.json({ pay: true });
+  } catch {
+    res.status(500);
+  }
+});
 module.exports = router;
