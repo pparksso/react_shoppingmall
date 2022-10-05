@@ -32,16 +32,12 @@ app.use(
 app.use(express.static(path.join(__dirname, "/build")));
 app.set("port", process.env.PORT || 8099);
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "/build/index.html"));
-});
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/build/index.html"));
-});
 app.use("/user", userRouter);
 app.use("/cart", cartRouter);
 app.use("/item", itemRouter);
-
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/build/index.html"));
+});
 const PORT = app.get("port");
 app.listen(PORT, () => {
   console.log(PORT + "포트");
