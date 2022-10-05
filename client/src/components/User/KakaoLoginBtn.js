@@ -1,9 +1,7 @@
 import React from "react";
-import { KAKAO_KEY } from "./KakaoLoginKey";
-import { REDIRECT_URL } from "./KakaoLoginKey";
 
 const KakaoLoginBtn = () => {
-  const kakaoAuth = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
+  const kakaoAuth = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URL}&response_type=code`;
 
   const kakaoLoginBtn = (e) => {
     e.preventDefault();

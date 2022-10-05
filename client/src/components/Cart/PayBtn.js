@@ -1,7 +1,6 @@
 import axios from "axios";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ADMIN_KEY } from "../User/KakaoLoginKey";
 import { useDispatch } from "react-redux";
 import { approval } from "../../store/slice/kakaopay";
 
@@ -16,7 +15,7 @@ const PayBtn = ({ price, email }) => {
       method: "POST",
       url: `https://kapi.kakao.com/v1/payment/ready`,
       headers: {
-        Authorization: `KakaoAK ${ADMIN_KEY}`,
+        Authorization: `KakaoAK ${process.env.REACT_APP_ADMIN_KEY}`,
         "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
       },
       params: {

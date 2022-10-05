@@ -1,7 +1,5 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { KAKAO_KEY } from "./KakaoLoginKey";
-import { REDIRECT_URL } from "./KakaoLoginKey";
 import { useNavigate } from "react-router-dom";
 
 const KakaoRedirect = () => {
@@ -11,7 +9,7 @@ const KakaoRedirect = () => {
   useEffect(() => {
     axios({
       method: "POST",
-      url: `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${KAKAO_KEY}&redirect_uri=${REDIRECT_URL}&code=${code}`,
+      url: `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URL}&code=${code}`,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
       },

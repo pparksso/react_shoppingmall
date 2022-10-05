@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { ADMIN_KEY } from "../User/KakaoLoginKey";
 import { useNavigate } from "react-router-dom";
 
 const SuccessPay = () => {
@@ -19,7 +18,7 @@ const SuccessPay = () => {
       method: "POST",
       url: "https://kapi.kakao.com/v1/payment/approve",
       headers: {
-        Authorization: `KakaoAK ${ADMIN_KEY}`,
+        Authorization: `KakaoAK ${process.env.REACT_APP_ADMIN_KEY}`,
       },
       params: {
         cid: "TC0ONETIME",
