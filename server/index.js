@@ -7,6 +7,7 @@ const cors = require("cors");
 const userRouter = require("./routes/user");
 const cartRouter = require("./routes/cart");
 const itemRouter = require("./routes/item");
+const path = require("path");
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -28,12 +29,12 @@ app.use(
     origin: true,
   })
 );
+app.use(express.static(path.join(__dirname, "/build")));
 app.set("port", process.env.PORT || 8099);
 
 app.get("/", (req, res) => {
-  res.send("hi node");
+  res.sendFile(path.join(__dirname + "/build/index.html"));
 });
-
 app.use("/user", userRouter);
 app.use("/cart", cartRouter);
 app.use("/item", itemRouter);
