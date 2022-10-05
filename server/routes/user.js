@@ -6,6 +6,7 @@ const userDb = require("../db/user");
 const countDb = require("../db/count");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
+const axios = require("axios");
 
 router.post("/isLogined", auth, (req, res) => {
   try {
@@ -76,33 +77,82 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "서버 오류입니다." });
   }
 });
-router.post("/kakaologin", async (req, res) => {
-  const token = req.body.token;
-  const email = req.body.email;
+router.get("/kakaoredirect", async (req, res) => {
+  const code = req.query.code;
+  const KAKAO_KEY = process.env.KAKAO_KEY;
+  const REDIRECT_URL = process.env.REDIRECT_URL;
   try {
-    const findEmail = await userDb.findOne({ email });
-    if (!findEmail) {
-      const userCount = await countDb.findOneAndUpdate({ name: "user" }, { $inc: { count: 1 } });
-      userDb.create(
-        {
-          email,
-          token,
-        },
-        (err, result) => {
-          res.cookie("auth", token, { maxAge: 1000 * 60 * 24 * 24 }).json({ login: true });
-        }
-      );
-    } else {
-      userDb.updateOne({ email }, { $set: { token } }, (err, result) => {
-        if (result.modifiedCount === 1) {
-          res.cookie("auth", token, { maxAge: 1000 * 60 * 24 * 24 }).json({ login: true });
-        }
-      });
-    }
+    axios({
+      method: "POST",
+      url: `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${KAKAO_KEY}&redirect_uri=${REDIRECT_URL}&code=${code}`,
+      Headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+      },
+    }).then((res) => {
+      const token = res.data.access_token;
+      if (token) {
+        axios({
+          url: `https://kapi.kakao.com/v2/user/me?property_keys=["kakao_account.email"]`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }).then((res) => {
+          const email = res.data.kakao_account.email;
+          const findEmail = userDb.findOne({ email });
+          if (!findEmail) {
+            const userCount = countDb.findOneAndUpdate({ name: "user" }, { $inc: { count: 1 } });
+            userDb.create(
+              {
+                email,
+                token,
+              },
+              (err, result) => {
+                res.cookie("auth", token, { maxAge: 1000 * 60 * 24 * 24 }).json({ login: true });
+              }
+            );
+          } else {
+            userDb.updateOne({ email }, { $set: { token } }, (err, result) => {
+              if (result.modifiedCount === 1) {
+                res.cookie("auth", token, { maxAge: 1000 * 60 * 24 * 24 }).json({ login: true });
+              }
+            });
+          }
+        });
+      }
+    });
   } catch {
-    res.status(500);
+    res.status("500");
   }
 });
+// router.post("/kakaologin", async (req, res) => {
+//   const token = req.body.token;
+//   const email = req.body.email;
+//   try {
+//     const findEmail = await userDb.findOne({ email });
+//     if (!findEmail) {
+//       const userCount = await countDb.findOneAndUpdate({ name: "user" }, { $inc: { count: 1 } });
+//       userDb.create(
+//         {
+//           email,
+//           token,
+//         },
+//         (err, result) => {
+//           res.cookie("auth", token, { maxAge: 1000 * 60 * 24 * 24 }).json({ login: true });
+//         }
+//       );
+//     } else {
+//       userDb.updateOne({ email }, { $set: { token } }, (err, result) => {
+//         if (result.modifiedCount === 1) {
+//           res.cookie("auth", token, { maxAge: 1000 * 60 * 24 * 24 }).json({ login: true });
+//         }
+//       });
+//     }
+//   } catch {
+//     res.status(500);
+//   }
+// });
+
 router.post("/logout", (req, res) => {
   try {
     const token = req.body.token;
