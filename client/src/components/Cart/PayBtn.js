@@ -10,12 +10,13 @@ const PayBtn = ({ price, email }) => {
   const success = "https://ilbisonte.herokuapp.com/successpay";
   const fail = "https://ilbisonte.herokuapp.com/failpay";
   const cancle = "https://ilbisonte.herokuapp.com/";
+  const ADMIN_KEY = process.env.REACT_APP_ADMIN_KEY;
   const kakaoPayBtn = () => {
     axios({
       method: "POST",
       url: `https://kapi.kakao.com/v1/payment/ready`,
       headers: {
-        Authorization: `KakaoAK ${process.env.REACT_APP_ADMIN_KEY}`,
+        Authorization: `KakaoAK ${ADMIN_KEY}`,
         "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
       },
       params: {

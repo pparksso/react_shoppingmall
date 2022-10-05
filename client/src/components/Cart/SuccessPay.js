@@ -7,6 +7,7 @@ const SuccessPay = () => {
   const navigate = useNavigate();
   const params = new URL(document.location.toString()).searchParams;
   const pg_token = params.get("pg_token");
+  const ADMIN_KEY = process.env.REACT_APP_ADMIN_KEY;
   const tid = useSelector((state) => {
     return state.kakaopay.tid;
   });
@@ -18,7 +19,7 @@ const SuccessPay = () => {
       method: "POST",
       url: "https://kapi.kakao.com/v1/payment/approve",
       headers: {
-        Authorization: `KakaoAK ${process.env.REACT_APP_ADMIN_KEY}`,
+        Authorization: `KakaoAK ${ADMIN_KEY}`,
       },
       params: {
         cid: "TC0ONETIME",

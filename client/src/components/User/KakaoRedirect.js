@@ -6,10 +6,12 @@ const KakaoRedirect = () => {
   const params = new URL(document.location.toString()).searchParams;
   const code = params.get("code");
   const navigate = useNavigate();
+  const KAKAO_KEY = process.env.REACT_APP_KAKAO_KEY;
+  const REDIRECT_URL = process.env.REACT_APP_REDIRECT_URL;
   useEffect(() => {
     axios({
       method: "POST",
-      url: `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URL}&code=${code}`,
+      url: `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${KAKAO_KEY}&redirect_uri=${REDIRECT_URL}&code=${code}`,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
       },
