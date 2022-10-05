@@ -3,9 +3,10 @@ import axios from "axios";
 import "../../scss/main.scss";
 import { useSelector } from "react-redux";
 import Product from "../Product/Product";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Category = () => {
+  const navigate = useNavigate();
   const params = useParams();
   const getCategory = params.category;
   const Movepage = useSelector((state) => {
@@ -27,13 +28,17 @@ const Category = () => {
   useEffect(() => {
     axios({
       url: `http://localhost:8080/item/category/${category}?page=${page}`,
-    }).then((res) => {
-      setAll(res.data.currentItems);
-      setCount(res.data.totalItems);
-      setTotalPage(res.data.totalPage);
-      setStartPage(res.data.startPage);
-      setLastPage(res.data.lastPage);
-    });
+    })
+      .then((res) => {
+        setAll(res.data.currentItems);
+        setCount(res.data.totalItems);
+        setTotalPage(res.data.totalPage);
+        setStartPage(res.data.startPage);
+        setLastPage(res.data.lastPage);
+      })
+      .catch((err) => {
+        navigate("/500");
+      });
   }, [category, page]);
   return (
     <div className="sub">

@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import KakaoLoginBtn from "./KakaoLoginBtn";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const emailFocus = useRef();
@@ -45,7 +47,7 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        console.log("500보내야됨");
+        navigate("/500");
       });
   };
   const loginClickEvent = (e) => {

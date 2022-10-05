@@ -33,7 +33,7 @@ const Mypage = () => {
         setAddress01(res.data.user.address01);
         setAddress02(res.data.user.address02);
       })
-      .catch((err) => console.log("500보내야됨"));
+      .catch((err) => navigate("/500"));
   }, []);
 
   const inputName = (e) => {
@@ -86,7 +86,7 @@ const Mypage = () => {
         }
       })
       .catch((err) => {
-        console.log("500보내야됨");
+        navigate("/500");
       });
   };
 

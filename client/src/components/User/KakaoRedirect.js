@@ -2,11 +2,12 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { KAKAO_KEY } from "./KakaoLoginKey";
 import { REDIRECT_URL } from "./KakaoLoginKey";
+import { useNavigate } from "react-router-dom";
 
 const KakaoRedirect = () => {
   const params = new URL(document.location.toString()).searchParams;
   const code = params.get("code");
-
+  const navigate = useNavigate();
   useEffect(() => {
     axios({
       method: "POST",
@@ -42,16 +43,16 @@ const KakaoRedirect = () => {
                   }
                 })
                 .catch((err) => {
-                  console.log(err);
+                  navigate("/500");
                 });
             })
             .catch((err) => {
-              console.log(err);
+              navigate("/500");
             });
         }
       })
       .catch((err) => {
-        console.log(err);
+        navigate("/500");
       });
   }, []);
 

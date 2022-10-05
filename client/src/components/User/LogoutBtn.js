@@ -1,8 +1,10 @@
 import React from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 const LogoutBtn = () => {
+  const navigate = useNavigate();
   const [cookie, , removeCookie] = useCookies(["auth"]);
   const token = cookie.auth;
   const logout = () => {
@@ -20,7 +22,7 @@ const LogoutBtn = () => {
         }
       })
       .catch((err) => {
-        console.log("500보내야됨");
+        navigate("/500");
       });
   };
   return (

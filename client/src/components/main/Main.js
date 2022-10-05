@@ -4,8 +4,10 @@ import "../../scss/main.scss";
 import Weekly from "../Items/Weekly";
 import { useSelector } from "react-redux";
 import Product from "../Product/Product";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
+  const navigate = useNavigate();
   const Movepage = useSelector((state) => {
     return state.page.value.num;
   });
@@ -20,9 +22,13 @@ const Main = () => {
   useEffect(() => {
     axios({
       url: "http://localhost:8080/item/best",
-    }).then((res) => {
-      setBest(res.data.items);
-    });
+    })
+      .then((res) => {
+        setBest(res.data.items);
+      })
+      .catch((err) => {
+        navigate("/500");
+      });
   }, []);
   useEffect(() => {
     setPage(Movepage);
@@ -30,13 +36,17 @@ const Main = () => {
   useEffect(() => {
     axios({
       url: `http://localhost:8080/item/category/${category}?page=${page}`,
-    }).then((res) => {
-      setAll(res.data.currentItems);
-      setCount(res.data.totalItems);
-      setTotalPage(res.data.totalPage);
-      setStartPage(res.data.startPage);
-      setLastPage(res.data.lastPage);
-    });
+    })
+      .then((res) => {
+        setAll(res.data.currentItems);
+        setCount(res.data.totalItems);
+        setTotalPage(res.data.totalPage);
+        setStartPage(res.data.startPage);
+        setLastPage(res.data.lastPage);
+      })
+      .catch((err) => {
+        navigate("/500");
+      });
   }, [page]);
   return (
     <div className="main">

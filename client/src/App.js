@@ -12,6 +12,8 @@ import CartPage from "./components/Cart/CartPage";
 import SuccessPay from "./components/Cart/SuccessPay";
 import CanclePay from "./components/Cart/CanclePay";
 import FailPay from "./components/Cart/FailPay";
+import NotFound from "./components/Err/NotFound";
+import ServerErr from "./components/Err/ServerErr";
 
 function App() {
   return (
@@ -30,8 +32,13 @@ function App() {
           <Route path="/successpay" element={<SuccessPay />} />
           <Route path="/canclepay" element={<CanclePay />} />
           <Route path="/failpay" element={<FailPay />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+        <Routes>
+          <Route path="/500" element={<ServerErr />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );

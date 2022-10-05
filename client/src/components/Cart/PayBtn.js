@@ -1,11 +1,12 @@
 import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ADMIN_KEY } from "../User/KakaoLoginKey";
 import { useDispatch } from "react-redux";
 import { approval } from "../../store/slice/kakaopay";
 
 const PayBtn = ({ price, email }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const success = "http://localhost:3000/successpay";
   const fail = "http://localhost:3000/failpay";
@@ -32,12 +33,11 @@ const PayBtn = ({ price, email }) => {
       },
     })
       .then((res) => {
-        console.log(res.data);
         dispatch(approval({ tid: res.data.tid, partner_user_id: email }));
         window.location.replace(`${res.data.next_redirect_pc_url}`);
       })
       .catch((err) => {
-        console.log(err);
+        navigate("/500");
       });
   };
   return (

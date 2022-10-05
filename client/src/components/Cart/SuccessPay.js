@@ -2,8 +2,10 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ADMIN_KEY } from "../User/KakaoLoginKey";
+import { useNavigate } from "react-router-dom";
 
 const SuccessPay = () => {
+  const navigate = useNavigate();
   const params = new URL(document.location.toString()).searchParams;
   const pg_token = params.get("pg_token");
   const tid = useSelector((state) => {
@@ -39,7 +41,7 @@ const SuccessPay = () => {
           }
         })
         .catch((err) => {
-          console.log(err);
+          navigate("/500");
         });
     });
   }, []);

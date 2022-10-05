@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../../scss/detail.scss";
 import CartBtn from "../Items/CartBtn";
 
 const Detail = () => {
+  const navigate = useNavigate();
   const params = useParams();
   const no = parseInt(params.no);
   const [desc, setDesc] = useState("");
@@ -27,7 +28,7 @@ const Detail = () => {
         setTitle(res.data.result.title);
       })
       .catch((err) => {
-        console.log("500보내야함");
+        navigate("/500");
       });
   }, [no]);
   const subtractCount = () => {

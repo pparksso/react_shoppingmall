@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Cookies } from "react-cookie";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PayBox from "./PayBox";
 import PayBtn from "./PayBtn";
 
 const cookies = new Cookies();
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const [noCart, setNocart] = useState(false);
   const [del, setDel] = useState(false);
   const [items, setItems] = useState([]);
@@ -51,7 +52,7 @@ const CartPage = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        navigate("/500");
       });
   }, [del]);
   const deleteItem = (no) => {
@@ -69,7 +70,7 @@ const CartPage = () => {
         else return alert("장바구니에서 상품을 제거하지 못했습니다.");
       })
       .catch((err) => {
-        console.log(err);
+        navigate("/500");
       });
   };
   return (

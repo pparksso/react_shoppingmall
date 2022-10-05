@@ -132,3 +132,22 @@
 .sub {
   margin: 150px 0;
 }
+.err {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    font-size: 5vw;
+    font-weight: 700;
+  }
+  p {
+    font-size: 1.5vw;
+  }
+}

@@ -77,7 +77,7 @@ const Register = () => {
           }
         })
         .catch((err) => {
-          console.log("500보내야됨");
+          navigate("/500");
         });
     } else {
       alert("형식에 맞는 이메일 주소를 입력해주세요.");
@@ -114,7 +114,7 @@ const Register = () => {
             }
           })
           .catch((err) => {
-            console.log("500보내야됨");
+            navigate("/500");
           });
       } else return alert("비밀번호가 일치하지 않습니다");
     } else {

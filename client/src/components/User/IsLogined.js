@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import { Cookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 const cookies = new Cookies();
-
 const IsLogined = () => {
+  const navigate = useNavigate();
   const [login, setLogin] = useState(false);
   const token = cookies.get(["auth"]);
+
   if (token) {
     axios({
       url: "http://localhost:8080/user/isLogined",
@@ -19,7 +21,7 @@ const IsLogined = () => {
         if (res.data.auth) return setLogin(true);
         else return setLogin(false);
       })
-      .catch((err) => console.log("500"));
+      .catch((err) => navigate("/500"));
   }
   return !!login;
 };

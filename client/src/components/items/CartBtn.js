@@ -1,9 +1,11 @@
 import axios from "axios";
 import React from "react";
 import { Cookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 const cookies = new Cookies();
 
 const CartBtn = ({ no, count }) => {
+  const navigate = useNavigate();
   const token = cookies.get(["auth"]);
   const cartIn = () => {
     if (token) {
@@ -21,7 +23,7 @@ const CartBtn = ({ no, count }) => {
           if (!res.data.add) return alert(`${res.data.message}`);
         })
         .catch((err) => {
-          console.log(err);
+          navigate("/500");
         });
     } else return alert("로그인 후 이용이 가능합니다.");
   };
