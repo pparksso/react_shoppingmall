@@ -35,7 +35,6 @@ const SuccessPay = () => {
         url: "https://ilbisonte.herokuapp.com/cart/pay",
       })
         .then((res) => {
-          console.log(res.data);
           if (res.data.pay) {
             window.location.replace("/");
           }
