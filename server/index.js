@@ -31,9 +31,9 @@ app.use(
 );
 app.use(express.static(path.join(__dirname, "/build")));
 app.set("port", process.env.PORT || 8099);
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname + "/build/index.html"));
+app.get;
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/build/index.html");
 });
 app.use("/user", userRouter);
 app.use("/cart", cartRouter);
