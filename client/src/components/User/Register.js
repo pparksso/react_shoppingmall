@@ -62,7 +62,7 @@ const Register = () => {
     var regExp = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
     if (regExp.test(email)) {
       axios({
-        url: "http://localhost:8080/user/emailCheck",
+        url: "https://ilbisonte.herokuapp.com/user/emailCheck",
         method: "POST",
         data: {
           email: email,
@@ -95,7 +95,7 @@ const Register = () => {
     if (emailReturn) {
       if (password === pwCheck) {
         axios({
-          url: "http://localhost:8080/user/join",
+          url: "https://ilbisonte.herokuapp.com/user/join",
           method: "POST",
           data: {
             email,

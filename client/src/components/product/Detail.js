@@ -17,7 +17,7 @@ const Detail = () => {
 
   useEffect(() => {
     axios({
-      url: `http://localhost:8080/item?no=${no}`,
+      url: `https://ilbisonte.herokuapp.com/item?no=${no}`,
     })
       .then((res) => {
         const korPrice = res.data.result.price.toLocaleString();

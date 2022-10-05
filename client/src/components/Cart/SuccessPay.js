@@ -32,7 +32,7 @@ const SuccessPay = () => {
       axios({
         method: "POST",
         data: res.data,
-        url: "http://localhost:8080/cart/pay",
+        url: "https://ilbisonte.herokuapp.com/cart/pay",
       })
         .then((res) => {
           console.log(res.data);

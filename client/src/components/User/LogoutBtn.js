@@ -9,7 +9,7 @@ const LogoutBtn = () => {
   const token = cookie.auth;
   const logout = () => {
     axios({
-      url: "http://localhost:8080/user/logout",
+      url: "https://ilbisonte.herokuapp.com/user/logout",
       method: "POST",
       data: {
         token,

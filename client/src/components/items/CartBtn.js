@@ -11,7 +11,7 @@ const CartBtn = ({ no, count }) => {
     if (token) {
       axios({
         method: "POST",
-        url: "http://localhost:8080/cart",
+        url: "https://ilbisonte.herokuapp.com/cart",
         data: {
           count,
           no,

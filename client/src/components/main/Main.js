@@ -21,7 +21,7 @@ const Main = () => {
   const [category, setCategory] = useState("all");
   useEffect(() => {
     axios({
-      url: "http://localhost:8080/item/best",
+      url: "https://ilbisonte.herokuapp.com/item/best",
     })
       .then((res) => {
         setBest(res.data.items);
@@ -35,7 +35,7 @@ const Main = () => {
   }, [Movepage]);
   useEffect(() => {
     axios({
-      url: `http://localhost:8080/item/category/${category}?page=${page}`,
+      url: `https://ilbisonte.herokuapp.com/item/category/${category}?page=${page}`,
     })
       .then((res) => {
         setAll(res.data.currentItems);

@@ -32,7 +32,7 @@ const Login = () => {
     if (password === "") return alert("비밀번호를 입력해주세요.");
     axios({
       method: "POST",
-      url: "http://localhost:8080/user/login",
+      url: "https://ilbisonte.herokuapp.com/user/login",
       withCredentials: true,
       data: {
         email,

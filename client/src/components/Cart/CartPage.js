@@ -20,7 +20,7 @@ const CartPage = () => {
   useEffect(() => {
     axios({
       method: "POST",
-      url: `http://localhost:8080/cart/cartview`,
+      url: `https://ilbisonte.herokuapp.com/cart/cartview`,
       withCredentials: true,
       data: {
         token,
@@ -58,7 +58,7 @@ const CartPage = () => {
   const deleteItem = (no) => {
     axios({
       method: "POST",
-      url: `http://localhost:8080/cart/del`,
+      url: `https://ilbisonte.herokuapp.com/cart/del`,
       withCredentials: true,
       data: {
         no,

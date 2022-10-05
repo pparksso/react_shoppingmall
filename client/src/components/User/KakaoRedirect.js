@@ -30,7 +30,7 @@ const KakaoRedirect = () => {
               const email = res.data.kakao_account.email;
               axios({
                 method: "POST",
-                url: "http://localhost:8080/user/kakaologin",
+                url: "https://ilbisonte.herokuapp.com/user/kakaologin",
                 withCredentials: true,
                 data: {
                   token,

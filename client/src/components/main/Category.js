@@ -27,7 +27,7 @@ const Category = () => {
   }, [Movepage]);
   useEffect(() => {
     axios({
-      url: `http://localhost:8080/item/category/${getCategory}?page=${page}`,
+      url: `https://ilbisonte.herokuapp.com/item/category/${getCategory}?page=${page}`,
     })
       .then((res) => {
         setAll(res.data.currentItems);

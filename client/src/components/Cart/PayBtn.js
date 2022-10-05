@@ -8,9 +8,9 @@ import { approval } from "../../store/slice/kakaopay";
 const PayBtn = ({ price, email }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const success = "http://localhost:3000/successpay";
-  const fail = "http://localhost:3000/failpay";
-  const cancle = "http://localhost:3000/";
+  const success = "https://ilbisonte.herokuapp.com/successpay";
+  const fail = "https://ilbisonte.herokuapp.com/failpay";
+  const cancle = "https://ilbisonte.herokuapp.com/";
   const kakaoPayBtn = () => {
     axios({
       method: "POST",

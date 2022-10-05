@@ -21,7 +21,7 @@ const Mypage = () => {
 
   useEffect(() => {
     axios({
-      url: "http://localhost:8080/user/mypage",
+      url: "https://ilbisonte.herokuapp.com/user/mypage",
       method: "POST",
       data: { token },
     })
@@ -65,7 +65,7 @@ const Mypage = () => {
     if (address01 === "") return alert("주소를 입력해주세요.");
 
     axios({
-      url: "http://localhost:8080/user/editinfo",
+      url: "https://ilbisonte.herokuapp.com/user/editinfo",
       method: "POST",
       data: {
         token,

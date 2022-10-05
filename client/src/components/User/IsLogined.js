@@ -11,7 +11,7 @@ const IsLogined = () => {
 
   if (token) {
     axios({
-      url: "http://localhost:8080/user/isLogined",
+      url: "https://ilbisonte.herokuapp.com/user/isLogined",
       method: "POST",
       data: {
         token,
