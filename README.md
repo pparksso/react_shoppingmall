@@ -1,45 +1,108 @@
 # react_shoppingmall
 
-## 진행상황
+![main](https://user-images.githubusercontent.com/100568355/194115902-0d44de6b-eec4-4793-8c81-55393c725b3e.gif)
 
-- 반응형
+---
 
-## 수정하고 싶은 부분들
+### 목적 
+ - react를 더 공부하고, server와 접목해보기 위해 만든 간단한 쇼핑몰 웹페이지입니다.
+ 
+### 사용언어
+ - javascript
+ 
+### 서버 
+ - nodejs express
+ 
+### 데이터베이스
+ - mongoDB(mongoose)
+ 
+### 개발 인원
+ - 1인
+ 
+### 개발 기간
+ - 17일
+ 
+### 라우터 구조
+| 메소드 | 주소                | 라우터     |              역할               |
+| ------ | :------------------ | :--------- | :-----------------------------: |
+| POST   | /isLogined          | user.js    |           로그인 인증            |
+| POST   | /join               | ''         | 회원가입 페이지를 통한 회원가입   |
+| POST    | /emailCheck         | ''         |    이메일 중복 체크              |
+| POST   | /login              | ''         |회원가입 페이지를 통한 회원의 로그인|
+| POST   | /kakaologin         | ''         |카카오를 통한 회원가입, 로그인    |
+| POST   | /logout             | ''         |            로그아웃             |
+| POST   | /withdrawal         | ''         |           회원 탈퇴             |
+| POST   | /mypage             | ''         |          회원 정보              |
+| POST    | /editinfo           | ''         |    수정된 회원정보 저장          |
+| GET    | /                   | item.js    |        상품 정보 제공           |
+| GET    | /category/:category | ''         |   카테고리 별 상품 제공         |
+| GET   | /best               | ''         |        weekly best 상품 제공   |
+| POST    | /                   | cart.js    | cart 품목에 담기              |
+| POST   | /cartview           | ''         |  cart에 담긴 상품 제공         |
+| POST    | /del                | ''         | 장바구니에 담긴 상품 삭제       |
+| POST   | /pay                | ''         |       카카오페이 결제       |
 
-- 로그인 인증, 로그아웃, 페이지네이션, 장바구니 수량 수정 로직 고민중
-- redux-persist 사용(좀 더 공부해야함)
 
-## error
+### 컴포넌트 구조
 
-1. Expected `onClick` listener to be a function, instead got a value of `object` type.
-
-- redux-toolkit을 사용하다 만난 에러, 페이지 번호를 누르면 페이지번호와 카테고리를 리덕스로 넘겨주는 함수를 onclick에 담았는데 그냥 dispatch로 보내서 난 에러, ()=>이렇게 함수 형태로 보내야한다!(온클릭 이벤트에도 마찬가지로 적용된다. 함수형태로 보내지 않으면 랜더링 시 클릭하지 않아도 함수가 실행됨)
-
-2. 페이지를 눌렀을 때 깜빡이는 현상
-
-- useEffect의 실행조건에 대해서 더 공부할 수 있었다
-
-3. 페이지네이션을 컴포넌트화하고, 함수를 리듀서로 하나로 사용하다보니 스테이트 값이 각 카테고리마다 리셋되지않고 그대로 페이지값을 가져가는 현상이 있었다. 이것을 해결하기 위해 카테고리를 클릭할 때마다 스테이트값을 1로 다시 변경시켰다.. 이렇게 하는게 아닌 것 같은데... 재렌더링이 몇번이나 되는 것 같다.. 더 좋은 방법을 생각해봐야겠다.
-
-4. 클라이언트와 서버가 쿠키를 공유하고 싶을 때는 credentials 옵션이 양쪽 모두에게 추가되어야한다. 이 경우 'Access-Control-Allow-Origin'이 모두 허용되는 *면 안되는데, cors 모듈을 사용할 경우 기본 설정이 *이기 때문에, origin만 허용하도록 바꿔주어야한다. 그래서 결론적으로 내가 사용한 방법은, 서버쪽에서는
-
-```javascript
-app.use(
-  cors({
-    credentials: true,
-    origin: true,
-  })
-);
+```
+/components
+  ├── Cart
+    ├── /CanclePay.js
+    ├── /CartPage.js
+    ├── /FailPay.js
+    ├── /PayBox.js
+    ├── /PayBtn.js
+    └── /SuccessPay
+  ├── Err
+    ├── /NotFound.js
+    └── /ServerErr.js
+  ├── Footer
+    └── /Footer.js
+  ├── Header
+    ├── /Header.js
+    └── /UtilMenu.js
+  ├── Items
+    ├── /CartBtn.js
+    ├── /Item.js
+    └── /Weekly.js
+  ├── Main
+    ├── /Category.js
+    ├── /Main.js
+    └── /Pagination.js
+  ├── Product
+    ├── /Detail.js
+    └── /Product.js
+  └── User
+    ├── /IsLogined.js
+    ├── /KakaoLoginBtn.js
+    ├── /KakaoRedirect.js
+    ├── /Login.js
+    ├── /LogoutBtn.js
+    ├── /Mypage.js
+    └── /Register.js
 ```
 
-클라이언트에서는 withCredentials: true, 를 옵션으로 넣어주었다!
+### 주요 기능
 
-5. 서버측에서 클라이언트의 쿠키에 토큰을 저장할 때 httponly를 하면 클라이언트에서 토큰을 읽지 못한다. httponly 옵션은 브라우저에서 쿠키에 접근할 수 없도록(CSS 등) 제한하는 옵션인데, 이 옵션으로 인해 클라이언트측의 어떤 자바스크립트코드도 쿠키에 접근하지 못하게 된다. 로그인 인증에 대해서 다른 방법이 없나 생각해봐야할 것 같다.(내가 구현한 방식은, 로그인 시 서버에서 클라이언트의 쿠키에 토큰을 저장하고, db에 같은 토큰을 저장하고 난 후, 인증은 그 db에 있는 토큰과 클라이언트에 있는 토큰이 맞는지 확인하는 방법이다.)
+![login](https://user-images.githubusercontent.com/100568355/194115754-89afa454-83ef-4b24-a45b-00ed74b619c7.gif)
+- 카카오 로그인
+ 1. REST API를 이용해 카카오 로그인(회원가입), 로그아웃 구현
+ 
+![pay](https://user-images.githubusercontent.com/100568355/194115823-39c2d60a-d189-43f3-8a7d-2c92efe84767.gif)
+- 장바구니 페이지
+ 1. 상품 페이지에서 장바구니를 클릭하면 장바구니에 품목이 반영
+ 2. 장바구니 페이지에서 물품 삭제 가능
+ 3. 장바구니에 담긴 상품들 총 구매금액 실시간 확인 가능
+- 카카오 페이
+ 1. 장바구니에서 카카오페이 결제 가능
+ 
+ ### 아쉬웠던 부분
+ - 결제내역 페이지 만들기, 장바구니페이지에서 수량 수정 로직 고민 중.. 수량 수정 마다 서버로 전송하는 게 좋은지, 리덕스에 저장해서 다른페이지로 이동 시 로그인 인증을 통해 수정하게 하는게 좋을 지 고민중
+ - 배포 시 랜더링 시간 최대한 짧게 만들기
+ 
 
-6. 토큰을 만들 때 db에 저장된 \_id 를 섞어서 만들어 로그인 시 그 토큰을 verify 하여 나온 id로 로그인 인증로직을 만들었는데, 카카오 로그인은 아무것도 verify되지 않은 토큰이었기 때문에 로그인 인증 로직에 문제가 생겼다. 그래서 인증 자체를 그냥 토큰만 대조하는 것으로 바꾸게 되었다.
 
-7. 에러페이지를 만들었는데, category 컴포넌트를 랜딩하는 과정에서 /다음 바로 params를 사용하는 바람에 /다음 어떤 문자가 와도 거르지 못하고 카테고리 컴포넌트가 랜딩되었다. 카테고리 컴포넌트에서 if문을 통해 에러페이지로 보내려고 했지만 false 조건만 만들기가 까다로워 path를 바꾸기로 하였다.
+### <a href="https://ilbisonte.herokuapp.com/">배포</a>
+### <a href="https://velog.io/@pparksso/react-nodejs-Toy-Project-%EA%B0%84%EB%8B%A8%ED%95%9C-%EC%87%BC%ED%95%91%EB%AA%B0-%ED%86%A0%EC%9D%B4%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8" >error</a>
 
-8. heroku 에서 배포를 진행하는데 모듈을 찾을 수 없다고 계속 뜨는 이유! 폴더명을 바꿔도 깃허브에서는 인식하지 못한다... 하... 일일히 다시 바꿔줘야됨
-
-9. 개발 단계에서는 문제가 없었는데 배포하고 난 후, 직접 url로 코드 등을 받아오는 카카오 api에서 문제가 있었다. 다 잘 이동이 되는데 찾아보니 주소창에 직접 입력하는 url은 서버로 요청을 보내는데, 서버에서 요청받은 url이 없으면 응답해줄 파일이 없고, 이에 따라 클라이언트는 오류가 발생하는 것이었다.
