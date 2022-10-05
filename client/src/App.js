@@ -27,11 +27,11 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/detail/:no" element={<Detail />} />
           <Route exact path="/mypage" element={<Mypage />} />
-          <Route exact path="/kakaoredirect" element={<KakaoRedirect />} />
+          <Route path="/kakaoredirect" element={<KakaoRedirect />} />
           <Route exact path="/cart" element={<CartPage />} />
-          <Route exact path="/successpay" element={<SuccessPay />} />
-          <Route exact path="/canclepay" element={<CanclePay />} />
-          <Route exact path="/failpay" element={<FailPay />} />
+          <Route path="/successpay" element={<SuccessPay />} />
+          <Route path="/canclepay" element={<CanclePay />} />
+          <Route path="/failpay" element={<FailPay />} />
           <Route path="/500" element={<ServerErr />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
