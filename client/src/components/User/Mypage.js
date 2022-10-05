@@ -165,7 +165,7 @@ const Mypage = () => {
               <button className="btn resetBtn" onClick={reset}>
                 취소
               </button>
-              <button className="btn signOutBtn">탈퇴</button>
+              {/* <button className="btn signOutBtn">탈퇴</button> */}
             </div>
           </form>
         </div>

@@ -115,21 +115,21 @@ router.post("/logout", (req, res) => {
     res.status(500).json({ message: "서버 오류" });
   }
 });
-router.post("/withdrawal", auth, async (req, res) => {
-  try {
-    const email = await req.body.email;
-    const password = await req.body.password;
-    const hashPw = await userDb.findOne({ email });
-    bcrypt.compare(password, hashPw.password).then((result) => {
-      if (!result) return res.json({ message: "비밀번호가 틀렸습니다." });
-      userDb.deleteOne({ email }, (err, result) => {
-        res.json({ delete: true });
-      });
-    });
-  } catch (err) {
-    res.status(500).json({ messate: "서버 오류" });
-  }
-});
+// router.post("/withdrawal", auth, async (req, res) => {
+//   try {
+//     const email = await req.body.email;
+//     const password = await req.body.password;
+//     const hashPw = await userDb.findOne({ email });
+//     bcrypt.compare(password, hashPw.password).then((result) => {
+//       if (!result) return res.json({ message: "비밀번호가 틀렸습니다." });
+//       userDb.deleteOne({ email }, (err, result) => {
+//         res.json({ delete: true });
+//       });
+//     });
+//   } catch (err) {
+//     res.status(500).json({ messate: "서버 오류" });
+//   }
+// });
 router.post("/mypage", auth, (req, res) => {
   const user = req.user;
   res.json({ user });
