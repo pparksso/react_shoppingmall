@@ -181,8 +181,8 @@
   "devDependencies": {},
   "scripts": {
     "client-build": "cd client && npm ci && npm run build && cd ../",
-    "server-build": "cd server && npm ci && npm run build && cd ../",
-    "heroku-prebuild": "npm run client-build && npm run server-build && mv ./client/build ./server/build",
+    "server-build": "cd server && npm ci --dev && cd ../",
+    "heroku-prebuild": "npm run client-build && npm run server-build && mv ./client/build ./server",
     "start": "cd server && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
